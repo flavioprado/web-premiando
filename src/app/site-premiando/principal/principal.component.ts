@@ -75,13 +75,13 @@ export class PrincipalComponent implements OnInit {
   }
 
   openDialog(video: any){
-    if(this.checkIsIphone()){
-      window.open(video, "_blank");
-    } else {
+    // if(this.checkIsIphone()){
+    //   window.open(video, "_blank");
+    // } else {
       this.dialog.open(ViewVideoComponent, {
         data: video
       });
-    }
+   // }
   }
 
   openDialogGanhadores(nome: any, numero: any, cidade: any, data: any, imagem: any){
