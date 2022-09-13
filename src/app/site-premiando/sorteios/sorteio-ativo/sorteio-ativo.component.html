@@ -1,0 +1,172 @@
+<div *ngIf="loading" class="loader"></div>
+<div style="margin-top: 20px;">
+    <!--section hero-->
+    <section class="hero">
+        <!--mobile-->
+        <h3 class="bold colorazul mobile" style="display: none;text-align: center;">{{sorteio.titulo}}</h3>
+        <div class="texto-bloco2 colorazul mobile" style="display: none;text-align: center;">
+            <label>{{sorteio.descricao}}</label>
+        </div>
+        <!--Hero left-->
+        <div class="hero-right">
+            <img src="/uploads/{{sorteio.imagem}}" style="border-radius: 10px;">
+        </div>
+
+        <!--Hero right-->
+        <div class="hero-left" style="cursor: pointer;padding: 0% 3% 0% 3%;">
+            <div class="texto-bloco1">
+                <!--dektop-->
+                <h3 class="bold colorazul desktop">{{sorteio.titulo}}</h3>
+            </div>
+            <div class="texto-bloco2 colorazul desktop">
+                <label>{{sorteio.descricao}}</label>
+            </div>
+
+            <div class="box-bottons">
+                <div>
+                    <h6 class="colorazul2">Apenas<br> <label style="font-size: 22px;color: #fc7321;font-weight: bold;">R{{sorteio.valor |
+                            currency}}</label>
+                    </h6>
+                </div>
+                <div>
+                    <h6 class="colorazul2" style="font-weight: bold;">{{sorteio.adicional1}}</h6>
+                </div>
+                <div>
+                    <h6 class="colorazul2" style="font-weight: bold;">{{sorteio.adicional2}}</h6>
+                </div>
+            </div>
+
+            <div *ngIf="sorteio.exibirData" style="margin-top: 10px;margin-bottom: 10px;">Sorteio confirmado para {{sorteio.dataSorteio |
+                date: 'dd/MM/yyyy'}}.</div>
+
+            <label id="htmlSanitized" [innerHtml]="sorteio.texto | safeHtml"
+                style="text-align: justify;margin: 0px;"></label>
+        </div>
+    </section>
+
+
+    <!--section participar-->
+    <section class="participar">
+        <div class="container">
+            <div class="title mobile-title-participar" style="display: none;">
+                <h2 class="medium-bold colorazul2 font-all-title">Como participar ?</h2>
+                <h5 class="medium colorSubTitle">Aprenda em 04 passos simples a como participar dos nossos sorteios.</h5>
+            </div>
+            <div class="boxs">
+                <!--escolha uma rifa-->
+                <div id="content-box-participar">
+                    <img src="assets/site/icons/section participar/icon1.png" class="icon-participar">
+                    <div class="text">
+                        <h5 class="colorazul2 font-participar" style="font-size: 16px;">Escolha uma Rifa</h5>
+                        <h6 class="medium colorSubTitle" style="font-size: 12px;">É muito facil participar.<br>Comece
+                            escolhendo uma<br>Rifa ativa
+                        </h6>
+                    </div>
+                </div>
+
+                <!--selecione numeros-->
+                <div id="content-box-participar">
+                    <img src="assets/site/icons/section participar/icon2.png" class="icon-participar">
+                    <div class="text">
+                        <h5 class="colorazul2 font-participar" style="font-size: 16px;">Selecione os números</h5>
+                        <h6 class="medium colorSubTitle" style="font-size: 12px;">Escolha quantos quiser!<br>Quanto mais,
+                            mais chances<br>de ganhar.
+                        </h6>
+                    </div>
+                </div>
+
+                <!--Faça o pagamento-->
+                <div id="content-box-participar">
+                    <img src="assets/site/icons/section participar/icon3.png" class="icon-participar">
+                    <div class="text">
+                        <h5 class="colorazul2 font-participar" style="font-size: 16px;">Faça o pagamento</h5>
+                        <h6 class="medium colorSubTitle" style="font-size: 12px;">Escolha uma das formas de<br>pagamento
+                            disponíveis</h6>
+                    </div>
+                </div>
+
+                <!--Faça o pagamento-->
+                <div id="content-box-participar">
+                    <img src="assets/site/icons/section participar/icon4.png" class="icon-participar">
+                    <div class="text">
+                        <h5 class="colorazul2 font-participar" style="font-size: 16px;">Aguarde o sorteio</h5>
+                        <h6 class="medium colorSubTitle" style="font-size: 12px;">Agora é aguardar o sorteio<br>pela
+                            Loteria Federal e boa<br>sorte!
+                        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--compra rifas-->
+    <section class="compra-rifas">
+        <!--<img src="assets/site/hero.jpg" alt="">-->
+        <!--title-->
+        <div class="compra-rifas-horizontal">
+            <div class="compra-rifas-text-cota">
+                <h1 class="medium-bold colorazul2 font-all-title">COTAS</h1>
+                <h3 class="medium colorSubTitle" style="font-size: 16px;margin: 10px 0 10px;">Clique e selecione quantas cotas você quiser!
+                </h3>
+            </div>
+
+            <div class="compra-rifas-filtros-cota">
+                <button (click)="changeColor(1)" style="background-color: #fc7321;"
+                    class="button-rifas-status btn">Livre
+                    ({{cotasLivres.length}})</button>
+                <button (click)="changeColor(2)" style="background-color: #b4b4b4;"
+                    class="button-rifas-status btn">Reservado ({{cotasReservadas.length}})</button>
+                <button (click)="changeColor(3)" style="background-color: #1ad598;" class="button-rifas-status btn">Pago
+                    ({{cotasPagas.length}})</button>
+            </div>
+            <button class="button-rifas-status" (click)="openMeusNumerosDialog()"
+                style="color: #575570;background-color: #ffffff00;;cursor: pointer;border-style: solid;margin-bottom: 20px;font-size: 14px;">
+                Ver meus números</button>
+        </div>
+
+        <div class="cards-cota" *ngIf="!sorteio.rifinha">
+            <label [class]="cota.cotaClass" class="card-cota btn" *ngFor="let cota of cotasFiltered"
+                (click)="cota.status == 1 ? selectCota(cota) : showToolTip(cota.numeroCota,cota.clientePagador)">
+                {{ ("000" + cota.numeroCota).slice(-3) | mask: '999' }}
+            </label>
+        </div>
+
+        <div class="cards-cota" *ngIf="sorteio.rifinha">
+            <label [class]="cota.cotaClass" class="card-cota btn" *ngFor="let cota of cotasFiltered"
+                (click)="cota.status == 1 ? selectCota(cota) : showToolTip(cota.numeroCota,cota.clientePagador)">
+                {{ ("00" + cota.numeroCota).slice(-2) | mask: '99' }}
+            </label>
+        </div>
+    </section>
+</div>
+
+<div id="popfinalizar" class="raffle-selected-numbers bg-white py-3"
+    style="bottom: 0px;left: 0px; display: none;background-color: white;height: 90px;position: fixed;color: white;z-index: 1000;width: 100%;">
+    <div>
+        <div class="cards-cota-finalizar margin-cotas-finalizar" *ngIf="!sorteio.rifinha">
+            <label [class]="cardCota" style="background-color: #576661;padding: 0.1em 0.5em 0.1em 0.5em;"
+                class="card-cota btn" *ngFor="let cota of cotasHaComprar" (click)="unSelectCota(cota)">
+                {{("000" + cota.numeroCota).slice(-3) | mask: '999'}}
+            </label>
+        </div>
+
+        <div class="cards-cota-finalizar margin-cotas-finalizar" *ngIf="sorteio.rifinha">
+            <label [class]="cardCota" style="background-color: #576661;padding: 0.1em 0.5em 0.1em 0.5em;"
+                class="card-cota btn" *ngFor="let cota of cotasHaComprar" (click)="unSelectCota(cota)">
+                {{("00" + cota.numeroCota).slice(-2) | mask: '99'}}
+            </label>
+        </div>
+
+        <div style="margin-bottom: 10px;display: list-item;padding-top: 10px;">
+            <label class="pop-finalizar-label-total">
+                {{cotasHaComprar.length}} x R{{sorteio.valor | currency}} = R{{cotasHaComprar.length * sorteio.valor |
+                currency}}
+            </label>
+
+            <button id="bt_finalizar_reserva" class="button-rifas-status button-pop-finalizar btn"
+                (click)="confirmarReserva()">
+                Finalizar
+            </button>
+        </div>
+    </div>
+</div>

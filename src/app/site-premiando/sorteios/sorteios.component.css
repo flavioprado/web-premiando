@@ -1,0 +1,20 @@
+.slideshow-compra-cota {
+    position: absolute;
+}
+  @media (max-width: 450px) {
+    .slideshow-compra-cota {
+        left: 30%;
+        top: 50%;
+    }
+}
+
+.participar > .container .boxs {
+    margin-top: 46px;
+    display: flex;
+    flex-direction: row;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+  }

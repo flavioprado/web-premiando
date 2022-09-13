@@ -1,0 +1,32 @@
+<div class="mg-mobile">
+    <!--sorteios ativos-->
+    <section class="sorteiosativos" style="margin-top: 30px;background-color: transparent;display: inline;">
+        <div class="title">
+            <h2 class="medium-bold colorazul2 font-all-title">Sorteios Ativos</h2>
+            <h5 class="medium colorSubTitle">Escolha um de nossos sorteios e comece a participar</h5>
+        </div>
+
+        <!--sorteios ativos-->
+        <section class="sorteiosativos" style="display: inline;">
+            <div class="boxs-ativos">
+                <div *ngFor="let sorteio of listSorteios" class="box">
+                    <div *ngIf="!sorteio.ocultar" (click)="openSorteioAtivo(sorteio.titulo, sorteio.id)">
+                        <div class="container-imagem">
+                            <img *ngIf="sorteio.imagem" src="/uploads/{{sorteio.imagem}}">
+                            <div *ngIf="!sorteio.imagem" class="loader"></div>
+                        </div>
+                        <div class="container-marca">
+                            <!-- <img src="assets/site/sorteios/marcasorteio.png" alt=""> -->
+                        </div>
+                        <div class="container-infos">
+                            <h3 class="bold colorazul2">{{sorteio.titulo}}</h3>
+                            <h5 class="medium colorSubTitle">
+                                {{sorteio.descricao}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>

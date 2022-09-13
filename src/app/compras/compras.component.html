@@ -1,0 +1,438 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="compra">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-danger card-header-black">
+            <h4 class="card-title mt-0" style="display: flex;">
+              <div>
+                <div class="mb-3 justify-content-center filtros-compras-mobile">
+                  <div class="align-self-end wdt-filter">
+                    <div class="input-group col-md-12">
+                      <input type="text" class="form-control text-white bt-border-custom" placeholder="Comprador" aria-label="Comprador"
+                        aria-describedby="basic-addon2" (keyup.enter)="atualizarListaEFiltrar()"
+                        [(ngModel)]="filter.name">
+                      <div class="input-group-append">
+                        <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                          (click)="clearFilterSearchName()">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="align-self-end wdt-filter">
+                    <div class="input-group col-md-12">
+                      <input type="text" class="form-control text-white bt-border-custom" placeholder="Cota" aria-label="Cota"
+                        aria-describedby="basic-addon2" [(ngModel)]="filter.cota">
+                      <div class="input-group-append">
+                        <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                          (click)="clearFilterSearchCota()">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="align-self-end">
+                    <div class="input-group col-md-12">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter text-white bt-size-filter dropleft"
+                          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{filter.nomeSorteio ? filter.nomeSorteio.substring(0, 21) : 'Sorteio'}}
+                        </button>
+                        <div class="input-group-append">
+                          <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                            (click)="clearFilterSearchSorteio()">
+                            <i class="material-icons">close</i>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu" style="overflow: scroll;height: 500px;">
+                          <a class="dropdown-item" style="color: black;" *ngFor="let sorteio of sorteioList"
+                            (click)="setFilterSorteio(sorteio)">
+                            {{ sorteio.titulo }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="align-self-end">
+                    <div class="input-group col-md-12">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter text-white bt-size-filter"
+                          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{filter.formaPagamento ? filter.formaPagamento.substring(0, 21) : 'Forma de Pgto'}}
+                        </button>
+                        <div class="input-group-append">
+                          <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                            (click)="clearFilterSearchFormaPagamento()">
+                            <i class="material-icons">close</i>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" style="color: black;" *ngFor="let conta of contaList"
+                            (click)="setFilterFormaPagamento(conta)">
+                            #{{ conta.codigoBanco }} - {{ conta.nomeBanco }} - {{ conta.titular }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="align-self-end">
+                    <div class="input-group col-md-12">
+                      <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter text-white bt-size-filter"
+                          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          {{filter.statusDescricao ? filter.statusDescricao : 'Status'}}
+                        </button>
+                        <div class="input-group-append">
+                          <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                            (click)="clearFilterSearchStatus()">
+                            <i class="material-icons">close</i>
+                          </button>
+                        </div>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" style="color: black;" [ngClass]="getLineColor(status.id)"
+                            *ngFor="let status of statusList" (click)="setFilterStatus(status)">
+                            {{ status.descricao }}
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="align-self-end search-desktop">
+                    <div class="input-group col-md-12">
+                      <button mat-raised-button type="submit" (click)="atualizarListaEFiltrar()"
+                        class="btn btn-white pull-right" style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;">
+                        <i class="material-icons">search</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3 justify-content-center filtros-compras-mobile">
+                  <div class="align-self-end wdt-filter">
+                    <div class="input-group col-md-12">
+                      <input type="date" class="form-control text-white bt-border-custom" placeholder="Comprador" aria-label="Comprador"
+                        aria-describedby="basic-addon2" (keyup.enter)="atualizarListaEFiltrar()"
+                        [(ngModel)]="filter.dataPedidoInicio">
+                      <div class="input-group-append">
+                        <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                          (click)="clearFilterSearchData()">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="align-self-end wdt-filter">
+                    <div class="input-group col-md-12">
+                      <input type="date" class="form-control text-white bt-border-custom" placeholder="Comprador" aria-label="Comprador"
+                        aria-describedby="basic-addon2" (keyup.enter)="atualizarListaEFiltrar()"
+                        [(ngModel)]="filter.dataPedidoFim">
+                      <div class="input-group-append">
+                        <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                          (click)="clearFilterSearchData()">
+                          <i class="material-icons">close</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="align-self-end search-mobile">
+                    <div class="input-group col-md-12">
+                      <button mat-raised-button type="submit" (click)="atualizarListaEFiltrar()"
+                        class="btn btn-white pull-right" style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;width: 15rem;">
+                        <i class="material-icons">search</i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </h4>
+            <p class="card-category"> </p>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="">
+                  <th>ID</th>
+                  <th (click)="sort('dataCompra')" style="cursor: pointer;">Data     <span *ngIf="key =='dataCompra'">{{reverse ? '▲' : '▼'}}</span></th>
+                  <th (click)="sort('comprador')"  style="cursor: pointer;">Comprador<span *ngIf="key =='comprador'">{{reverse ? '▲' : '▼'}}</span></th>
+                  <th (click)="sort('idSorteio')"  style="cursor: pointer;">Sorteio  <span *ngIf="key =='idSorteio'">{{reverse ? '▲' : '▼'}}</span></th>
+                  <th>Cota</th>
+                  <th></th>
+                  <th></th>
+                  <th>Qtd</th>
+                  <th>Total</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </thead>
+
+                <tbody>
+                  <tr *ngFor="let compra of listCompras | orderBy: key : reverse | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index" [class]="getLineColorTable(compra.status)">
+                    <td>{{compra.id}}</td>
+                    <td><b>{{compra.dataCompra | date: 'dd/MM/yyyy'}}</b></td>
+                    <td>
+                      <tr style="font-weight: normal;color: black;font-size: 14px;">{{compra.comprador.substring(0, 30)}} -
+                        <a style="cursor: pointer;color: #000000e6;padding-left: 5px;font-weight: 900;"
+                          (click)="openChatWhatsApp(compra, '')"> {{compra.celular | mask: '(99)99999-9999'}}</a></tr>
+                      <tr style="font-weight: bold;color: black;font-size: 13px;">{{compra.email}}</tr>
+
+                  </td>
+                  <td><b>#{{compra.idSorteio}}</b></td>
+                  <td style="word-break: break-all;">
+                    <div *ngIf="!compra.rifinha" class="display-card-cotas">
+                      <label class="card-cota" *ngFor="let cota of compra.cotasCard">{{("000" + cota).slice(-3)
+                        }}</label>
+                    </div>
+                    <div *ngIf="compra.rifinha" class="display-card-cotas">
+                      <label class="card-cota" *ngFor="let cota of compra.cotasCard">{{("00" + cota).slice(-2)
+                        }}</label>
+                    </div>
+                  </td>
+                  <td>
+                    <i class="material-icons text-sucess-compras background-icons" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false" style="cursor: pointer;">
+                      whatsapp
+                    </i>
+                    <div class="dropdown-menu">
+                      <div *ngFor="let modeloMEnsagem of listModeloMensagem">
+                        <a class="dropdown-item" style="cursor: pointer;"
+                          (click)="openChatWhatsApp(compra, modeloMEnsagem.mensagem)">
+                          <span>{{modeloMEnsagem.nome}}</span>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                  <td><i [class]="getIconPayment(compra.status)">attach_money</i></td>
+                  <td><b>{{compra.quantidade}}</b></td>
+                  <td class="text-sucess-compras"><b>{{compra.total | currency:"BRL"}}</b></td>
+                  <td><i [class]="getClassIconRegysterPayment(compra.status)" (click)="openDialogRegisterPayment(compra)" data-toggle="modal"
+                      data-target="#registerPaymentModal" style="cursor: pointer;" *ngIf="compra.status !== 3 && compra.status !== 2">
+                      {{getIconRegysterPayment(compra.status)}}</i></td>
+                  <td><i class="material-icons text-info-compras background-icons" (click)="loadCartDetail(compra.id)"
+                      data-toggle="modal" data-target="#cartDatailModal" style="cursor: pointer;">shopping_cart</i></td>
+                  <td><i style="cursor: pointer;"
+                      [class]="getClassIconExcludeOrReserver(compra.status)" (click)="reservarOrDelete(compra, compra.status)">
+                      {{getIconExcludeOrReserver(compra.status)}}
+                    </i>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" style="text-align: end;"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Register Payment-->
+<div class="modal fade" id="registerPaymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar Pagamento</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalRegistroPagamento">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div style="display: grid;grid-template-columns: 1fr 1fr;">
+          <div class="align-self-end" style="width: 14rem;">
+            <div class="input-group col-md-12">
+              <input type="text" class="form-control bt-border-custom" placeholder="Valor" aria-label="Valor"
+                aria-describedby="basic-addon2" currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" style="color: black;"
+                [(ngModel)]="registroPagamento.valorPago">
+            </div>
+          </div>
+          <div class="align-self-end" style="width: 14rem;">
+            <div class="input-group col-md-12">
+              <input type="date" class="form-control bt-border-custom" placeholder="Data Pagamento" aria-label="Data Pagamento"
+                aria-describedby="basic-addon2" style="color: black;"
+                [(ngModel)]="registroPagamento.dataTransacao">
+            </div>
+          </div>
+        </div>
+
+        <div class="align-self-end" style="margin-top: 20px;">
+          <div class="input-group col-md-12">
+            <div class="input-group-prepend">
+              <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter bt-size-filter"
+                type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: black;width: 26.2rem;">
+                {{registroPagamento.nomeConta ? registroPagamento.nomeConta.substring(0, 21) : 'Forma de Pgto'}}
+              </button>
+              <div class="input-group-append">
+                <button *ngIf="value" class="btn btn-outline-secondary bt-close-filter" type="button"
+                  (click)="limparContaRegistroPagamento()" style="color: black;">
+                  <i class="material-icons">close</i>
+                </button>
+              </div>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" style="color: black;" *ngFor="let conta of contaList"
+                  (click)="setRegistroPagamentoFormaPagamento(conta)">
+                  #{{ conta.codigoBanco }} - {{ conta.nomeBanco }} - {{ conta.titular }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: inline;margin: 20px;text-align: center;">
+          <input type="file" style="display: none;" class="file-upload" formControlName="comprovante"
+            (change)="onFileSelected($event)" #fileUpload [value]="base64String">
+    
+          <div class="file-upload">
+    
+            {{fileName || "Nenhum comprovante selecionado"}}
+    
+            <button id="btt_regyster_payment" mat-mini-fab class="upload-btn btn btn-primary" (click)="fileUpload.click()">
+              <i class="material-icons">attach_file</i>
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" (click)="salvarRegistroPagamento()">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cart Detail-->
+<div class="modal fade" id="cartDatailModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <!-- style="background: linear-gradient(60deg, #000000, #5e5e5e);box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(12 12 12 / 40%);" -->
+    <div class="modal-content"
+      style="background: linear-gradient(60deg, #ffffff, #ffffff);box-shadow: 0 4px 20px 0px rgb(0 0 0 / 14%), 0 7px 10px -5px rgb(12 12 12 / 40%);">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel" style="color: rgb(0, 0, 0);">Detalhes</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <div style="display: grid;grid-template-columns: 1fr 2fr;" *ngIf="cartDatail">
+          <div class="label-header-cart-detail-bg">Sorteio:</div>
+          <div style="font-size: 11px;background-color: #cfcdcd85;font-weight: normal;color: black;">
+            {{cartDatail.resumoCompra.nomeSorteio}}</div>
+
+          <div class="label-header-cart-detail">Compra No.:</div>
+          <div style="font-weight: normal;color: black;">{{cartDatail.resumoCompra.numeroCompra}}</div>
+
+          <div class="label-header-cart-detail-bg">Cotas:</div>
+          <div style="background-color: #cfcdcd85;font-weight: normal">
+            <div style="word-break: break-all;">
+              <div *ngIf="!cartDatail.resumoCompra.rifinha" class="display-card-cotas" style="margin-top: 3px;">
+                <label class="card-cota" *ngFor="let cota of cartDatail.resumoCompra.cotasCard">{{("000" +
+                  cota).slice(-3)
+                  }}</label>
+              </div>
+              <div *ngIf="cartDatail.resumoCompra.rifinha" class="display-card-cotas">
+                <label class="card-cota" *ngFor="let cota of cartDatail.resumoCompra.cotasCard">{{("00" +
+                  cota).slice(-2)
+                  }}</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="label-header-cart-detail">Data do Pedido:</div>
+          <div style="font-weight: normal;color: black;">{{cartDatail.resumoCompra.dataCompra | date: 'dd/MM/yyyy HH:mm'}}
+          </div>
+
+          <div class="label-header-cart-detail-bg">Status:</div>
+          <div style="background-color: #cfcdcd85;font-weight: normal">
+            <label [ngClass]="getClassLabelStatus(cartDatail.resumoCompra.status)">
+              {{cartDatail.resumoCompra.status == 'Não Iniciado' ? 'Aguardando Pagamento' :
+              cartDatail.resumoCompra.status}}
+            </label>
+          </div>
+
+          <div class="label-header-cart-detail">Cliente:</div>
+          <div style="font-weight: normal;color: black;">{{cartDatail.resumoCompra.nomeCliente}}</div>
+
+          <div class="label-header-cart-detail-bg">Telefone:</div>
+          <div style="background-color: #cfcdcd85;">
+            <i class="material-icons text-sucess-compras background-icons" style="cursor: pointer;margin-top: 5px;"
+              (click)="openChatWhatsAppNoMsg(cartDatail.resumoCompra.celular)">whatsapp</i>
+          </div>
+
+          <div class="label-header-cart-detail">Preço Unidade:</div>
+          <div style="font-weight: normal;color: black;">{{cartDatail.resumoCompra.precoUnitario | currency: 'BRL'}}
+          </div>
+
+          <div class="label-header-cart-detail-bg">Qnt.:</div>
+          <div style="background-color: #cfcdcd85;font-weight: normal;color: black;">
+            {{cartDatail.resumoCompra.quantidadeCotas}}</div>
+
+          <div class="label-header-cart-detail">Total:</div>
+          <div style="font-weight: normal;color: #1bc727;">{{cartDatail.resumoCompra.total | currency: 'BRL'}}</div>
+
+          <div class="label-header-cart-detail-bg">Total pago:</div>
+          <div style="background-color: #cfcdcd85;font-weight: normal;color: black;">{{cartDatail.resumoCompra.totalPago
+            | currency: 'BRL'}}</div>
+
+          <div class="label-header-cart-detail">Valor devido:</div>
+          <div style="font-weight: normal;color: black;color: #ff3a3a;">{{cartDatail.resumoCompra.valorDevido |
+            currency: 'BRL'}}</div>
+
+          <div class="label-header-cart-detail-bg">CPF:</div>
+          <div style="background-color: #cfcdcd85;font-weight: normal;color: black;">
+            {{cartDatail.resumoCompra.cpfCliente}}</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="table-responsive">
+          <table *ngIf="cartDatail" class="table table-hover">
+            <thead class="">
+              <!-- <th class="label-header-cart-detail"><b>ID Transação</b></th> -->
+              <th class="label-header-cart-detail"><b>Data</b></th>
+              <th class="label-header-cart-detail"><b>Valor</b></th>
+              <th class="label-header-cart-detail"><b>Status</b></th>
+              <th class="label-header-cart-detail"><b></b></th>
+            </thead>
+
+            <tbody *ngFor="let transacao of cartDatail.resumoPagamento.transacoes">
+              <!-- <th class="label-header-cart-detail">{{transacao.id}}</th> -->
+              <th class="label-header-cart-detail">{{transacao.dataTransacao | date: 'dd/MM/yyyy'}}</th>
+              <th class="label-header-cart-detail" style="color: #1bc727;">{{transacao.valor | currency: 'BRL'}}</th>
+              <th>
+                <label [ngClass]="getClassLabelStatus(transacao.status)" style="margin-top: 0px"> {{transacao.status}} </label>
+              </th>
+              <th style="display: flex;gap: 7%;">
+              <i class="material-icons text-info background-icons" (click)="openDialogComprovante(transacao)" data-toggle="modal"
+              data-target="#comprovanteModal"
+               style="cursor: pointer;margin-top: 0px;" *ngIf="getOpcaoAprovarByStatus(transacao.status)">description</i>
+              <i class="material-icons text-success background-icons" (click)="aprovarTrasacao(transacao.id)" 
+               style="cursor: pointer;margin-top: 0px;" *ngIf="getOpcaoAprovarByStatus(transacao.status)">done</i>   
+              <i class="material-icons text-danger background-icons" (click)="cancelarTransacao(transacao.id)" 
+               style="cursor: pointer;margin-top: 0px;" *ngIf="getOpcaoAprovarByStatus(transacao.status)">delete_outline</i> 
+              </th>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Register Payment-->
+  <div class="modal fade" id="comprovanteModal" tabindex="-1" role="dialog" aria-labelledby="comprovanteModal"
+       aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="comprovanteModal">Comprovante</h5>
+      </div>
+      <div class="modal-body">
+        <img src="/uploads/{{comprovante}}" width="470" height="400">
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

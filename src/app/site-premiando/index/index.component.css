@@ -1,0 +1,38 @@
+@font-face {
+  font-family: ub-bold;
+  src: url(/src/assets/site/fonts/Ubuntu/Ubuntu-Bold.ttf);
+}
+
+/*presets*/
+* {
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  padding: 0px 0px;
+  max-width: 1124px;
+  margin: auto !important;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #eeeeee00 !important;
+}
+
+
+.floating {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  background-color: #25d366;
+  color: #FFF;
+  border-radius: 50px;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 2px 2px 3px #999;
+  z-index: 100;
+}
+
+.float-btn {
+  margin-top: 16px;
+}

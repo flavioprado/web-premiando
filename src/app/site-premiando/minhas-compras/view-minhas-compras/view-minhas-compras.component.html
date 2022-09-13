@@ -1,0 +1,70 @@
+<div style="margin-top: 20px;" class="mg-mobile">
+    <!--Minhas Compras-->
+    <section class="sorteiosativos" style="margin-top: 30px;background-color: transparent;display: inline;">
+        <div class="title">
+            <h2 class="medium-bold colorazul2" style="font-size: 30px;">Minhas Compras</h2>
+            <h5 class="medium colorSubTitle">Confira suas compras feitas na Premiando.</h5>
+        </div>
+        <div class="two" style="width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+            <a href="#/sorteios" class="medium botao-branco" style="color: #fc7322;background-color: transparent;">Comprar sorteios ativos</a>
+        </div>
+    </section>
+
+    <div style="text-align: -webkit-center;">
+        <div *ngIf="!listMinhasCompras" class="loader"></div>
+    </div>
+
+    <section class="sorteiosativos" style="display: inline;">
+        <div class="boxs-ativos" style="grid-template-columns: 1fr !important;gap: 0.1% 0%;">
+            <div *ngFor="let compra of listMinhasCompras" class="box size-box">
+                <div class="direction-card">
+                    <div class="container-imagem justify-image">
+                        <img *ngIf="compra.foto" src="/uploads/{{compra.foto}}" class="image-size-minhas-compras">
+                        <div *ngIf="!compra.foto" class="loader"></div>
+                    </div>
+                    <div class="card font-xs" style="width: 80%;">
+                        <div class="bold">
+                            <p><b>{{compra.tituloSorteio}}</b></p>
+                        </div>
+
+                        <div style="min-height: 50%;">
+                            <div class="direction-info-minhas-compras">
+                                
+                                <div style="margin-bottom: 20px;">
+                                    <div>Resv. em</div>
+                                    <div>
+                                        <div class="text-checkout-dados">{{compra.dataCompra | date: 'dd/MM/yyyy HH:mm'}}</div>
+                                    </div>
+                                </div>
+
+                                <div style="margin-bottom: 20px;">
+                                    <div>Situação</div>
+                                    <div [ngClass]="getStatusColor(compra.status)">{{compra.status == 'Não Iniciado' ? 'Pagamento Pendente'
+                                        : compra.status}}
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div>Minhas Cotas</div>
+                                    <div class="text-cotas-checkout" *ngIf="!compra.rifinha">
+                                        <div style="color: #595f6f;font-weight: bold;" *ngFor="let cota of compra.cotas">
+                                            {{("000" + cota).slice(-3) | mask: '999'}},</div>
+                                    </div>
+                                    <div class="text-cotas-checkout" *ngIf="compra.rifinha">
+                                        <div style="color: #595f6f;font-weight: bold;" *ngFor="let cota of compra.cotas">
+                                            {{("00" + cota).slice(-2) | mask: '99'}},</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="compra.status != 'Cancelado' && compra.status != 'Aprovado'">
+                            <p (click)="detalhar(compra)" style="color: #fc7321;font-weight: bold;cursor: pointer;"> <b> Ver mais detalhes </b> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

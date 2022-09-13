@@ -1,0 +1,156 @@
+<div  class="mg-mobile" style="margin-top: 20px;background-color: white;border-radius: 10px;padding: 2%;">
+    <div class="fonte-titulo">Você está quase lá!</div>
+<div style="font-size: small;color: #000000">Siga os passos e boa sorte.</div>
+<br>
+
+<div class="div-checkout">
+    <div class="fonte-titulo view-title-mobile">{{minhaCompra.tituloSorteio}}</div>
+    <br>
+    <div class="info-checkout-img">
+        <img *ngIf="minhaCompra.foto" src="/uploads/{{minhaCompra.foto}}" style="width: 100%;object-fit: cover;border-radius: 10px;">
+        <div *ngIf="!minhaCompra.foto" class="loader"></div>
+    </div>
+    <div class="info-checkout">
+        <div class="fonte-titulo view-title">{{minhaCompra.tituloSorteio}}</div>
+        
+        <div class="disp-text-checkout text-checkout-dados">
+            <div class="text-checkout-dados"><b>Data:</b></div>
+            <div class="text-checkout-dados">{{minhaCompra.dataCompra | date: 'dd/MM/yyyy HH:mm'}}</div>
+            <div class="text-checkout-dados"><b>Total:</b></div>
+            <div class="text-checkout-dados">R{{(minhaCompra.total) | currency}}</div>
+            <div class="text-checkout-dados"><b>Status:</b></div>
+            <div class="text-checkout-status text-checkout-dados" [ngClass]="getStatusColor(minhaCompra.status)">{{minhaCompra.status == 'Não Iniciado' ? 'Aguardando Pagamento' :
+                minhaCompra.status}}</div>
+            <div><b>Cotas:</b></div>
+            <div class="text-cotas-checkout text-checkout-dados" *ngIf="!minhaCompra.rifinha">
+                <div style="color: #000;" *ngFor="let cota of minhaCompra.cotas">
+                    {{("000" + cota).slice(-3) | mask: '999'}},
+                </div>
+            </div>
+            <div class="text-cotas-checkout text-checkout-dados" *ngIf="minhaCompra.rifinha">
+                <div style="color: #000;" *ngFor="let cota of minhaCompra.cotas">
+                    {{("00" + cota).slice(-2) | mask: '99'}},
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="text-checkout-dados" style="background-color: #fb66660d;;border-radius: 12px;text-align: justify;margin-top: 18px;margin-bottom: 18px;">
+    <div style="color: #ff5757;font-weight: 500;padding: 1%;">O envio do comprovante de pagamento é <b>OBRIGATÓRIO</b>.</div>
+    <div style="color: #ff5757;font-weight: 500;padding: 1%;">O prazo para pagamento é de <b>4
+            HORAS.</b> Após esse prazo, não
+        havendo nenhum informe de pagamento, o pedido será cancelado.</div>
+</div>
+<br>
+
+<div style="font-weight: bold;font-size: large;color: #000">Opções de Pagamento</div>
+<div style="font-size: small;color: #000">Efetue o pagamento e envie o comprovante para nosso time no WhatsApp</div>
+
+<section class="sorteiosativos" style="display: inline;">
+    <div class="boxs-ativos">
+        <div class="box div-fit-content">
+            <div style="width: 100%;margin: 0px;">
+                <div class="container-imagem">
+                     <img *ngIf="!qrCodeBase64" src="assets/site/logo-pix.png" width="230px" height="60px">
+                     <img *ngIf="qrCodeBase64" src="data:image/jpeg;base64,{{qrCodeBase64}}" width="200px" height="200px">
+                    
+                    <div *ngIf="qrCode" style="margin-top: 10px;text-align: center;display: contents;text-align: center;">
+                        <input  type="text" id="copiar"  value={{qrCode}} #hashInput  class="bt-copiar-hash" style="background-color: #5a5a5a;"/>
+                        <button for="copiar"  class="bt-copiar-hash"
+                                (click)="copyTextHash(hashInput)">
+                            Copiar
+                        </button>
+                        <label id="copied" style="display: none;margin-top: 10px;color: limegreen;">Copiado com sucesso!</label>
+                    </div>
+                </div>
+                <div class="card font-xs" id="gerarQrCodeCard">
+                    <div class="card-body font-xs" id="gerarQrCode">
+                        <p class="card-text mb-0 ">
+                            Titular<br> <b>RJ PAY SERVICOS LTDA</b>
+                        </p>
+                        <p class="card-text mb-0 ">
+                            Documento:<br> <b>44.055.269/0001-40</b>
+                        </p>
+                        <a class="btn btn-sm btn-primary mt-4 m bt-efetuar-pagamento bt-gerar-pix" (click)="gerarQrCode()" >
+                            Gerar Pix</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div [class]="!sorteio.ocultarConta ? (sorteio.tipoConta === 'Gateway de Pagamento' ? 'div-fit-content' : 'disabledclass') : ' disabledclass'" 
+             *ngFor="let sorteio of contaBancariaList" class="box">
+            <div *ngIf="!sorteio.ocultarConta" style="width: 100%;margin: 0px;">
+                <div class="container-imagem">
+                    <img *ngIf="sorteio.imagem" src="{{sorteio.imagem}}" width="230px" height="60px">
+                    <div *ngIf="!sorteio.imagem" class="loader"></div>
+                </div>
+                <div class="card font-xs" *ngIf="sorteio.tipoConta === 'Gateway de Pagamento'">
+                    <div class="card-body font-xs" >
+                        <p class="card-text mb-0 ">
+                            Titular<br> <b>{{sorteio.titular}}</b>
+                        </p>
+                        <p class="card-text mb-0 ">
+                            CNPJ<br> <b>{{sorteio.cpfOrCnpj}}</b>
+                        </p>
+                        <a href="{{sorteio.linkPagamento}}"
+                            target="_blank" class="btn btn-sm btn-primary mt-4 m bt-efetuar-pagamento">
+                            Efetuar Pagamento</a>
+                    </div>
+                </div>
+                <div class="container-infos">
+                    <h3 class="bold colorazul2">{{sorteio.titulo}}</h3>
+                    <h5 class="medium colorazul2">
+                        {{sorteio.descricao}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+        <div [class]="!sorteio.ocultarConta ? (sorteio.tipoConta === 'Conta Bancária' ? '' : 'disabledclass') : ' disabledclass'" 
+             *ngFor="let sorteio of contaBancariaList" class="box">
+            <div *ngIf="!sorteio.ocultarConta" style="width: 100%;margin: 0px;">
+                <div class="container-imagem">
+                    <img *ngIf="sorteio.imagem" src="{{sorteio.imagem}}"  width="230px" height="60px">
+                    <div *ngIf="!sorteio.imagem" class="loader"></div>
+                </div>
+                <div class="card font-xs" *ngIf="sorteio.tipoConta === 'Conta Bancária'">
+                    <div class="card-body font-xs" >
+                        <p class="card-text mb-0 ">
+                            Titular<br> <b>{{sorteio.titular}}</b>
+                        </p>
+                        <p class="card-text mb-0 ">
+                            Agência<br> <b>{{sorteio.agencia}} - {{sorteio.digitoAgencia}}</b>
+                        </p>
+                        <p class="card-text mb-0 ">
+                            Conta<br> <b>{{sorteio.numeroConta}} - {{sorteio.digitoConta}}</b>
+                        </p>
+                        <p class="card-text mb-0 ">
+                            Tipo de Conta<br> <b>Conta corrente</b>
+                        </p>
+                        <p class="card-text mb-0 ">
+                            CNPJ<br> <b>{{sorteio.cpfOrCnpj}}</b>
+                        </p>
+                    </div>
+                </div>
+                <div class="container-infos">
+                    <h3 class="bold colorazul2">{{sorteio.titulo}}</h3>
+                    <h5 class="medium colorazul2">
+                        {{sorteio.descricao}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<br><br><br>
+
+<div>
+    <a href="http://web.whatsapp.com/send?phone=5584994175896" target="_blank"
+        style="text-decoration: none;background-color: #00c259;color: white;border-radius: 45px;padding: 1.4%;display: block;text-align: center;cursor: pointer;width: fit-content;margin: auto;">
+        Enviar o comprovante de pagamento para o nosso WhatsApp
+    </a>
+</div>
+</div>

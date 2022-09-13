@@ -1,0 +1,251 @@
+/*section meus numero*/
+.meusnumeros {
+    margin-top: 150px;
+}
+
+.meusnumeros > div.title > h5 {
+    margin-top: 5px;
+}
+
+.meusnumeros > .boxs-ativos {
+    margin-top: 20px;
+}
+
+.meusnumeros > .boxs-ativos .box {
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 7%) 0px 0px 25px 2px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    transition: ease 1s;
+}
+
+.card {
+    box-shadow: 0 1px 4px 0 rgb(0 0 0 / 0%);
+}
+
+.meusnumeros > div.boxs-ativos .box:hover {
+    transform: translatey(-10px);
+    transition: ease 1s;
+}
+
+.meusnumeros > div.boxs-ativos .box .container-imagem {
+    width: 100%;
+    border-radius: 20px;
+}
+
+.meusnumeros > div.boxs-ativos .box .container-imagem img {
+    border-radius: 30px;
+    width: 100%;
+}
+
+.meusnumeros > div.boxs-ativos .box .container-marca {
+    width: 100%; 
+}
+
+.meusnumeros > div.title > h2 {
+    font-size: 30px;
+}
+
+@media (max-width: 768px) {
+    .meusnumeros > .title {
+        text-align: center;
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .meusnumeros > .title h5 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .meusnumeros {
+        margin-top: 100px;
+    }
+
+    .meusnumeros > div.boxs-ativos .box .container-infos > h5 {
+        font-size: 12px;
+    }
+}
+
+  body > section.meusnumeros > div.boxs-ativos.slick-initialized.slick-slider.slick-dotted > ul > li button{
+    background-color: white;
+    color: white;
+    border: 1px solid rgba(0, 0, 0, 0.582);
+    border-radius: 20px;
+  }
+
+  .meusnumeros > img {
+    position: absolute;
+    z-index: -98;
+    height: 405px;
+    width: 100%;
+    left: 0px;
+    opacity: 0.5;
+    margin-top: -182px;
+}
+  
+  body > section.meusnumeros > div.boxs-ativos.slick-initialized.slick-slider.slick-dotted > ul > li {
+    height: 10px;
+    width: 10px;
+    margin: 15px;
+    margin-top: 0;
+  }
+
+  .slick-initialized.slick-slider.slick-dotted > ul {
+    padding: 0;
+    transform: scale(0.6);
+    margin-top: -10px;
+  }
+
+
+.disabledclass{
+    display: none;
+}
+
+.div-checkout{
+    display: block;
+}
+
+.info-checkout-img{
+    display: flex;
+    width: 400px;
+    height: 150px;
+    object-fit: cover;
+    align-self: center;
+}
+
+.info-checkout {
+    display: contents;
+    width: 79%;
+    padding-left: 30px;
+}
+
+.text-checkout-dados {
+    font-weight: bold;
+    margin-right: 5%;
+    font-size: 14px;
+}
+
+.text-checkout-status {
+    color: #fc7321;
+    font-weight: bold;
+    margin-right: 5%;
+    font-size: 14px;
+}
+
+.text-checkout-status-pendente {
+    color: #e4d500;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-checkout-status-pago {
+    color: #09b417;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-checkout-status-cancelado {
+    color: #fc2121;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-cotas-checkout {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.direction-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.direction-info-minhas-compras{
+    display: grid; 
+    grid-template-columns: 1fr;
+    color: #575570
+}
+
+.size-box{
+    width: 90% !important;
+    cursor: revert !important;
+}
+
+.justify-image{
+    width: 100% !important;
+    text-align: center;
+}
+
+.image-size-minhas-compras{
+    width: 100% !important; 
+    height: 100% !important;
+    border-radius: 15px !important;
+}
+
+.mat-dialog-container {
+    width: 100% !important;
+    overflow: scroll !important;
+    height: 690px !important;
+}
+
+.cdk-overlay-container, .cdk-global-overlay-wrapper{
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.cdk-overlay-backdrop{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: auto;
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    opacity: 0;
+}
+
+.card .card-body {
+    padding: 0.1rem 0px;
+    position: relative;
+}
+
+.meusnumeros > .boxs-ativos .box {
+    background-color: white;
+    box-shadow: rgb(0 0 0 / 7%) 0px 0px 25px 2px;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    transition: ease 1s;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .mat-dialog-container {
+        width: 100% !important;
+    }
+
+    .cdk-overlay-container, .cdk-global-overlay-wrapper{
+        left: 0;
+    }
+    
+    .cdk-overlay-backdrop{
+        left: 0;
+    }
+}

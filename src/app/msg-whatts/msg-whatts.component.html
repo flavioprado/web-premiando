@@ -1,0 +1,108 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-danger card-header-black">
+                      <div class="mb-3 justify-content-center dsp-filter-clientes">
+                        <div style="display: flex;">
+                          <div class="align-self-end">
+                              <div class="input-group col-md-12">
+                                  <button mat-raised-button type="submit" class="btn btn-white pull-right"
+                                      style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;"
+                                      data-toggle="modal" data-target="#editMsgModal">
+                                      <i class="material-icons">add</i>
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table table-hover">
+                              <thead class="">
+                                  <th>
+                                      ID
+                                  </th>
+                                  <th></th>
+                                  <th></th>
+                                  <th></th>
+                              </thead>
+                              <tbody>
+                                  <tr
+                                      *ngFor="let msg of listModeloMensagem | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+                                      <td>
+                                          <b>{{msg.nome}}</b>
+                                      </td>
+                                      <td>
+                                        <div (click)="ativarDesativar(msg)">
+                                            <i class="material-icons background-icons text-success" 
+                                            style="cursor: pointer;" *ngIf="msg.ativo">visibility</i>
+                                            <i class="material-icons background-icons" 
+                                            style="cursor: pointer;" *ngIf="!msg.ativo" >visibility_off</i>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <i class="material-icons background-icons text-info"
+                                            style="cursor: pointer;" (click)="loadMsg(msg)"
+                                            data-toggle="modal" data-target="#editMsgModal" >edit</i>
+                                    </td>
+                                    <td>
+                                        <i class="material-icons background-icons text-danger"
+                                            (click)="deletar(msg)"
+                                            style="cursor: pointer;">delete_outline</i>
+                                    </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+                              nextLabel="Próximo" style="text-align: end;"></pagination-controls>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal Edit User-->
+<div class="modal fade" id="editMsgModal" tabindex="-1" role="dialog" aria-labelledby="editMsgModal"
+  aria-hidden="true">
+  <div class="modal-dialog" style="max-width: 1000px;" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="editMsgModalH5">Editar Mensagem</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalEditMsg">
+                  <span aria-hidden="true">&times;</span>
+              </button>
+          </div>
+          <div class="modal-body">
+              <div class="input">
+                <div class="title">Nome da Mensagem</div>
+                <input style="width: 98%;" class="text" type="text" placeholder="" [(ngModel)]="modeloMensagemCadastro.nome" />
+            </div>
+            <div class="input" style="margin-top: 10px">
+                <div class="title">Mensagem</div>
+                <textarea cols="60" rows="6" class="text" placeholder="" [(ngModel)]="modeloMensagemCadastro.mensagem">
+            
+                </textarea>
+            </div>
+            
+            <label style="margin-bottom: 10px;">Variáveis disponíveis:</label>
+            <div style="display: grid;grid-template-columns: 1fr 1fr 1fr;">
+                <label *ngFor="let variavel of variaveisDisponiveis" (click)="addIntoMsg(variavel)"
+                    style="font-size: 12px;background-color: black;color: white;border-radius: 5px;padding: 5px;margin: 3px;width: 190px;">
+                    {{variavel}}
+                </label>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+              <button type="button" class="btn btn-primary" (click)="saveOrUpdate()">Salvar</button>
+          </div>
+      </div>
+  </div>
+</div>

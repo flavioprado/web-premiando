@@ -1,0 +1,20 @@
+.img-ganhadores{
+    width: 550px;
+    height: 550px;
+}
+
+.img-body{
+    overflow: auto;
+    padding: 0px 0px;
+}
+
+@media (max-width: 600px) {
+    .img-ganhadores{
+        width: -webkit-fill-available;
+        height: -webkit-fill-available;
+    }
+
+    .img-body{
+        height: -webkit-fill-available;
+    }
+}

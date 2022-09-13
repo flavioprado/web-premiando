@@ -1,0 +1,108 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger card-header-black">
+                        <div class="mb-3 justify-content-center dsp-filter-clientes">
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        IMG
+                                    </th>
+                                    <th>
+                                        Titular/Banco
+                                    </th>
+                                    <th>
+                                        Agência
+                                    </th>
+                                    <th>
+                                        Conta
+                                    </th>
+                                    <th>
+                                        Tipo
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let conta of contaBancariaList | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+                                        <td>
+                                            <img src="{{conta.imagem}}" style="width: 120px;height: 50px;">
+                                        </td>
+                                        <td>
+                                            <tr><td style="width:15%">
+                                                <tr style="font-weight: 500;"> {{conta.codigoBanco}} -  {{conta.nomeBanco}}</tr>
+                                                <tr>{{conta.titular}} </tr>
+                                            </td>
+                                            </tr>
+                                        </td>
+                                        <td>
+                                            <b>{{conta.agencia}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{conta.numeroConta}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{conta.tipoConta}}</b>
+                                        </td>
+                                        <td>
+                                            <div (click)="ativarDesativar(conta)">
+                                                <i class="material-icons background-icons text-success" 
+                                                style="cursor: pointer;" *ngIf="!conta.ocultarConta">visibility</i>
+                                                <i class="material-icons background-icons" 
+                                                style="cursor: pointer;" *ngIf="conta.ocultarConta" >visibility_off</i>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons background-icons text-info"
+                                                style="cursor: pointer;" data-toggle="modal"
+                                                (click)="loadConta(conta)"
+                                                data-target="#editContaModal" >edit</i>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons background-icons text-danger"
+                                                (click)="deletar(conta)"
+                                                style="cursor: pointer;">delete_outline</i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+                                nextLabel="Próximo" style="text-align: end;"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit User-->
+<div class="modal fade" id="editContaModal" tabindex="-1" role="dialog" aria-labelledby="editContaModal"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalH5">Editar Conta</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalEditUser">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" >Salvar</button>
+            </div>
+        </div>
+    </div>
+</div> 

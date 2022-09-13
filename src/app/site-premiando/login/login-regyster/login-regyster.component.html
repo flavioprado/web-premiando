@@ -1,0 +1,25 @@
+
+<div class="loginBox"> 
+  <img class="user" src="https://i.ibb.co/yVGxFPR/2.png" height="100px" width="100px">
+  <h3 *ngIf="!isSaveNewUser()">Acessar</h3>
+  <h3 *ngIf="isSaveNewUser()" >DADOS DO PARTICIPANTE</h3>
+  <form action="login.php" method="post">
+      <div class="inputBox" *ngIf="!isSaveNewUser()"> 
+        <input id="uname" type="text"     name="CPF ou E-mail" placeholder="CPF ou E-mail" *ngIf="!isSaveNewUser()"  [(ngModel)]="loginCliente.email"> 
+        <input id="pass"  type="password" name="senha"         placeholder="senha"         *ngIf="isExistentLogin()" [(ngModel)]="loginCliente.senha"> 
+      </div> 
+      <div class="inputBox inputBox-cadastro" *ngIf="isSaveNewUser()"> 
+        <input id="nomeCompleto" type="text"     name="nomeCompleto" placeholder="Nome Completo"  [(ngModel)]="cliente.nome"> 
+        <input id="cpf"          type="text"     name="cpf"          placeholder="cpf"            [(ngModel)]="cliente.cpf" mask="000.000.000-00"> 
+        <input id="email"        type="text"     name="email"        placeholder="email"          [(ngModel)]="cliente.usuario.email"> 
+        <input id="celular"      type="text"     name="celular"      placeholder="celular"        [(ngModel)]="cliente.celular" mask="(00)000000000"> 
+        <input id="senha"        type="password" name="Senha"        placeholder="Senha"          [(ngModel)]="cliente.usuario.senha"> 
+      </div> 
+      <input type="submit" name="" value="OK"        *ngIf="!isExistentLogin() && !isSaveNewUser()" (click)="isLoginExists()">
+      <input type="submit" name="" value="Login"     *ngIf="isExistentLogin()"  (click)="login()">
+      <input type="submit" name="" value="Cadastrar" *ngIf="isSaveNewUser()"    (click)="saveOrUpdate()">
+  </form> <a href="#">Recuperar Senha<br> </a>
+  <div class="text-center">
+      <p style="color: #59238F;">Login</p>
+  </div>
+</div>

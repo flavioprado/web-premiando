@@ -1,0 +1,214 @@
+.card-cota {
+    padding: 3px;
+    background-color: rgb(54, 50, 50);
+    color: white;
+    margin: 1px;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    display: inline;
+    padding: .2em .6em .3em;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+    color: #fff;
+    border-radius: .25em;
+  }
+
+.text-yellow {
+    color: #FDAD23 !important; }
+  
+a.text-yellow:hover, a.text-yellow:focus {
+    color: #FDAD23 !important; }
+
+.line-pedding{
+background-color:#fdad2387;
+font-weight: bold;
+}
+
+.line-aproved{
+background-color:#1ed74c66;
+font-weight: bold;
+}
+
+.line-canceled{
+background-color:#fd232394;
+font-weight: bold;
+}
+
+.line-pedding-aproved{
+background-color:#235dfd45;
+font-weight: bold;
+}
+
+.text-sucess-compras{
+    color: #0c8f12
+}
+
+.text-info-compras{
+    color: #0b3a74 !important;
+}
+
+.background-icons{
+    background-color: #f8f8f8b3;
+    border-radius: 5px;
+    padding: 2px;
+  }
+
+.mat-form-field-appearance-legacy .mat-form-field-label .mat-form-field-outline .mat-form-field-empty.mat-form-field-label .mat-form-field-underline ::placeholder{
+    color: rgb(255 255 255 / 65%) !important;
+}
+
+.bt-close-filter {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 6px;
+    border-width: 0px !important;
+    color: white;
+}
+
+.text-white::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white !important;
+  opacity: 1; /* Firefox */
+}
+
+.form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
+}
+
+.form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: black;
+}
+
+.form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: black;
+}
+
+.display-card-cotas{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    width: 190px;
+}
+
+.bt-whatszap{
+    padding-left: 0px;
+    padding-right: 3px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border-radius: 5px;
+}
+
+.label-status-aprovado {
+    border-radius: 0.25em;
+    background-color: #21c729;
+    text-align: center;
+    padding: 2px 5px 2px 5px;
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+  
+  .label-status-pendente {
+    border-radius: 0.25em;
+    background-color: #fdad2387;
+    text-align: center;
+    padding: 2px 5px 2px 5px;
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+  
+  .label-status-cancelado{
+    background-color: #fd232394;
+    border-radius: 0.25em;
+    text-align: center;
+    padding: 2px 5px 2px 5px;
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    margin-top: 8px;
+  }
+
+  .label-header-cart-detail{
+    color: #000000;
+    padding-left: 5px;
+    font-weight: 900;
+  }
+
+  .label-header-cart-detail-bg{
+    color: #000000;
+    padding-left: 5px;
+    font-weight: 900;
+    background-color: #cfcdcd85;
+  }
+
+  .label-line-cart-detail{
+    background-color: #cfcdcd85;
+    font-weight: normal;
+    color: rgb(0, 0, 0)
+  }
+
+  .bt-border-custom{
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 5px;
+    border-color: #ffffff0f;
+    box-shadow: 0 2px 2px 0 rgb(153 153 153 / 14%), 0 3px 1px -2px rgb(153 153 153 / 20%), 0 1px 5px 0 rgb(153 153 153 / 12%);
+  }
+
+  .form-control, .is-focused .form-control{
+    background-image: linear-gradient(to top, #9c27b0 0px, rgba(255, 255, 255, 0) 0px), linear-gradient(to top, transparent 0px, rgba(255, 255, 255, 0) 0px) !important;
+  }
+
+  .form-control, label, input::placeholder {
+    line-height: 1.1;
+    padding-left: 5px !important;
+}
+
+.ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #353231 !important;
+    color: #fefefe;
+    cursor: default;
+    border-radius: 5px;
+}
+
+.bt-size-filter{
+    width: 140px;
+    height: 36px;
+}
+
+::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
+.dsp-filter-clientes{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.wdt-nome-filter-clientes{
+  width: 33rem;
+}
+
+.wdt-export-filter-clientes{
+  width: 15rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .dsp-filter-clientes{
+    grid-template-columns: 1fr;
+  }
+
+  .wdt-nome-filter-clientes{
+    width: 16rem;
+  }
+  
+  .wdt-export-filter-clientes{
+    width: 16rem;
+  }
+  
+}

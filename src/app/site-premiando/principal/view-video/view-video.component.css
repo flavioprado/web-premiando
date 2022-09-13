@@ -1,0 +1,9 @@
+.youtube-player{
+    width: 640px;
+}
+
+@media only screen and (max-width: 600px) {
+    .youtube-player{
+        width: -webkit-fill-available;
+    }
+}

@@ -1,0 +1,15 @@
+.config-ganhadores {
+    display: grid !important; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    animation: none; 
+    gap: 1%;
+    justify-content: center;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    .config-ganhadores {
+        grid-template-columns: 1fr; 
+        gap: 0.1%;
+    }
+}

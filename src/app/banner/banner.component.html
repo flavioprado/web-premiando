@@ -1,0 +1,81 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger card-header-black">
+                        <div class="align-self-end" style="display: grid;grid-template-columns: 1fr 1fr 1fr;">
+                            <div class="input-group col-md-12">
+                                <div class="input-group-prepend">
+                                    <button
+                                        class="btn btn-outline-secondary dropdown-toggle text-white bt-close-filter bt-size-filter dropleft"
+                                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        {{webSiteSlideShow.nomeSorteio ? webSiteSlideShow.nomeSorteio : 'Sorteio para redirecionar'}}
+                                    </button>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-outline-secondary bt-close-filter text-white" type="button"
+                                            style="height: 36px;">
+                                            <i class="material-icons">close</i>
+                                        </button>
+                                    </div>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" style="color: black;"
+                                            *ngFor="let sorteio of sorteioList" (click)="setSorteio(sorteio)">
+                                            {{ sorteio.titulo }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group col-md-12">
+                                <input type="file" style="display: none;" class="file-upload"
+                                    (change)="fileChange($event)" #fileUpload>
+
+                                <div class="file-upload">
+
+                                    {{fileName.substring(0,15) || "Selecionar imagem"}}
+
+                                    <button mat-mini-fab class="btn btn-primary" (click)="fileUpload.click()"
+                                        style="margin-left: 5px;">
+                                        <i class="material-icons">attach_file</i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button style="height: 36px;" type="button" class="btn btn-primary"
+                                (click)="salvar()">Salvar</button>
+
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th><i class="material-icons">image</i></th>
+                                    <th>
+                                        Sorteio para redirecionar 
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let slide of slideSHow$">
+                                        <td><img src="/uploads/{{slide.imagem}}" style="width: 100px;height: 100px;"></td>
+                                        <td>{{slide.idSorteio}}</td>
+                                        <td><i [class]="getIconVisibility(slide.ativo)" style="cursor: pointer;" (click)="alterarVisualizacaoBanner(slide)">
+                                            {{slide.ativo ? 'visibility' : 'visibility_off'}}
+                                            </i>
+                                        </td>
+                                        <td><i class="material-icons text-info">edit</i></td>
+                                        <td><i class="material-icons text-danger">delete_outline</i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,261 @@
+.disabledclass{
+    display: none;
+}
+
+.div-fit-content{
+    height: inherit;
+}
+
+.div-checkout{
+    display: flex;
+}
+
+.info-checkout-img{
+    display: inline-block;
+    width: 20%;
+    align-self: center;
+}
+
+.info-checkout {
+    display: inline-block;
+    width: 90%;
+    padding-left: 20px;
+    align-self: center;
+    margin-top: -20px;
+}
+
+.bt-enviar-zap {
+    text-decoration: none;
+    width: 45%;
+    background-color: #00c259;
+    color: white;
+    border-radius: 45px;
+    padding: 1%;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.text-checkout-dados {
+    /* font-weight: bold; */
+    margin-right: 0%;
+    font-size: 17px;
+}
+
+.text-checkout-status {
+    color: #fc7321;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-cotas-checkout {
+    display: flex;
+    flex-direction: row;
+    gap: 0% 0.3%;
+}
+
+.sorteiosativos > div.boxs-ativos .box .container-imagem {
+    width: 100%;
+    border-radius: 0px;
+    margin-top: 20px;
+  }
+  
+.sorteiosativos > div.boxs-ativos .box .container-imagem img {
+    border-radius: 0px;
+    width: 100%;
+    object-fit: scale-down;
+}
+
+.card-text{
+    margin: 15px;
+}
+
+b, strong {
+    font-weight: bold;
+}
+
+.bt-copiar-hash{
+    background-color: #fc7321;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 177px;
+    margin-left: 13%;
+    border-radius: 5px;
+    margin-top: 10px;
+    border-width: 0px;
+    padding: 4px;
+    font-weight: 700;
+}
+
+.bt-efetuar-pagamento{
+    background-color: #fc7321;
+    color: white;
+    display: block;
+    border-radius: 45px;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px;
+}
+
+.bt-gerar-pix{
+    background-color: #fc7321;
+    color: white;
+    display: block;
+    border-radius: 45px;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px;
+}
+
+.card {
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0);
+    margin-top: 0px;
+    background: #fff0;
+}
+
+.fonte-titulo{
+    font-weight: bold;
+    font-size: 22px;
+    color: #000000
+}
+
+.disp-text-checkout{
+    display: grid; 
+    grid-template-columns: 1fr 8fr;
+    color: #000000;
+    gap: 4% 1%;
+    margin-top: 10px;
+}
+
+.view-title{
+    display: flex;
+}
+
+.view-title-mobile{
+    display: none;
+}
+
+.text-checkout-status {
+    color: #fc7321;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-checkout-status-pendente {
+    color: #fac703;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-checkout-status-pago {
+    color: #09b417;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.text-checkout-status-cancelado {
+    color: #fc2121;
+    font-weight: bold;
+    margin-right: 5%;
+}
+
+.mg-mobile{
+    margin: 0%;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (max-width: 600px) {
+    .view-title{
+        display: none;
+    }
+    
+    .view-title-mobile{
+        display: flex;
+    }
+
+    .fonte-titulo{
+        font-size: larger;
+    }
+
+    .disp-text-checkout{
+        margin-top: 0px;
+        grid-template-columns: 1fr 6fr;
+    }
+
+    .info-checkout {
+        width: 99%;
+        margin-top: 10px;
+    }
+
+    .info-checkout-img{
+        display: flex;
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .bt-enviar-zap {
+        width: 100%;
+    }
+
+    .text-checkout-dados {
+        font-size: 13px;
+    }
+
+    .text-checkout-status {
+        font-size: 14px;
+    }
+
+    .text-cotas-checkout {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        display: grid;
+    }
+
+    .div-checkout{
+        display: block;
+    }
+
+    .card-text{
+        margin: 20px;
+        margin-left: 40px;
+    }
+
+    .bt-copiar-hash{
+        width: 173px;
+        margin-left: 28%;
+        margin-top: 4px
+    }
+
+    .bt-efetuar-pagamento{
+        width: auto;
+        margin: auto;
+    }
+
+    .bt-gerar-pix{
+        margin-bottom: 25px !important;
+    }
+
+    .sorteiosativos > .boxs-ativos {
+        margin-top: 20px  !important;
+        display: grid  !important;
+        grid-template-columns: 1fr  !important;
+        flex-direction: column  !important
+      }
+    
+      .sorteiosativos > .boxs-ativos .box {
+        width: 100% !important ;
+      }
+    
+      .sorteiosativos > div.boxs-ativos .box .container-infos {
+        margin-left: 20px  ;
+      }
+  
+      .mg-mobile{
+          margin: 0%;
+      }
+}
+
+
+  

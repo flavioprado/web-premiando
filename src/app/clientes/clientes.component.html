@@ -1,0 +1,278 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger card-header-black">
+                        <div class="mb-3 justify-content-center dsp-filter-clientes">
+
+                            <div style="display: flex;">
+                                <div class="align-self-end wdt-nome-filter-clientes">
+                                    <div class="input-group col-md-12">
+                                        <input type="text" class="form-control text-white bt-border-custom" style="background-color: transparent;"
+                                            placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon2"
+                                            [(ngModel)]="nameFilter">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary bt-close-filter" type="button"
+                                                    (click)="clearFilterSearchName()">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="align-self-end">
+                                    <div class="input-group col-md-12">
+                                        <button mat-raised-button type="submit" class="btn btn-white pull-right"
+                                            style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;"
+                                            (click)="atualizarListaEFiltrar()">
+                                            <i class="material-icons">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex;">
+                                <div class="align-self-end wdt-export-filter-clientes">
+                                    <div class="input-group col-md-12">
+                                        <input type="date" class="form-control text-white bt-border-custom"
+                                            placeholder="DataData" aria-label="Data" aria-describedby="basic-addon2"
+                                            [(ngModel)]="dataToExport">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary bt-close-filter" type="button">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="align-self-end">
+                                    <div class="input-group col-md-12">
+                                        <button mat-raised-button type="submit" class="btn btn-white pull-right"
+                                            style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;"
+                                            (click)="exportContact()">
+                                            <i class="material-icons">file_download</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Nome
+                                    </th>
+                                    <th>
+                                        E-mail
+                                    </th>
+                                    <th>
+                                        Telefone/Whatsapp
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let cliente of listClientes | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+                                        <td>
+                                            {{cliente.id}}
+                                        </td>
+                                        <td>
+                                            <b>{{cliente.nome}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{cliente.usuario.email}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{cliente.whatsapp | mask: '(99)99999-9999'}}</b>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons text-sucess-compras background-icons"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                                                style="cursor: pointer;">whatsapp</i>
+                                            <div class="dropdown-menu">
+                                                <div *ngFor="let modeloMEnsagem of listModeloMensagem">
+                                                    <a class="dropdown-item" style="cursor: pointer;"
+                                                        (click)="openChatWhatsApp(cliente, modeloMEnsagem.mensagem)">
+                                                        <span>{{modeloMEnsagem.nome}}</span>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons background-icons text-info"
+                                                style="cursor: pointer;" data-toggle="modal"
+                                                data-target="#editUserModal" (click)="loadCliente(cliente)">edit</i>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons background-icons" (click)="logarComo(cliente)"
+                                                style="cursor: pointer;">logout</i>
+                                        </td>
+                                        <td>
+                                            <i class="material-icons background-icons text-danger"
+                                                style="cursor: pointer;">delete_outline</i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+                                nextLabel="Próximo" style="text-align: end;"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit User-->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModal"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalH5">Editar Usuário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalEditUser">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="modal-title" id="editUserModalH5">USUÁRIO</h5>
+                <div style="display: grid;grid-template-columns: 1fr 3fr;margin-top: 20px">
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Nome"
+                                aria-label="Nome" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.nome">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="CPF" aria-label="CPF"
+                                aria-describedby="basic-addon2" style="color: black;" mask="000.000.000-99"
+                                [(ngModel)]="cliente.cpf">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid;grid-template-columns: 1fr 2fr 4fr;margin-top: 20px;">
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Telefone"
+                                aria-label="Telefone" aria-describedby="basic-addon2" style="color: black;"
+                                mask="(00) 0000-0000" [(ngModel)]="cliente.telefone">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Celular"
+                                aria-label="Celular" aria-describedby="basic-addon2" style="color: black;"
+                                mask="(00) 0000-0000" [(ngModel)]="cliente.celular">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Whatsapp"
+                                aria-label="Whatsapp" aria-describedby="basic-addon2" style="color: black;"
+                                mask="(00) 0000-0000" [(ngModel)]="cliente.whatsapp">
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="modal-title" id="editUserModalH5" style="margin-top: 20px">ENDEREÇO</h5>
+                <div style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;margin-top: 20px">
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="CEP" aria-label="CEP"
+                                aria-describedby="basic-addon2" style="color: black;" mask="00000-000"
+                                [(ngModel)]="cliente.endereco.cep">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Logradouro"
+                                aria-label="Logradouro" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.endereco.logradouro">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Numero"
+                                aria-label="Numero" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.endereco.numero">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Bairro"
+                                aria-label="Bairro" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.endereco.bairro">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid;grid-template-columns: 1fr 2fr 4fr;margin-top: 20px;">
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Complemento"
+                                aria-label="Complemento" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.endereco.complemento">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Cidade"
+                                aria-label="Cidade" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.endereco.cidade">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="UF" aria-label="UF"
+                                aria-describedby="basic-addon2" style="color: black;" mask="SS"
+                                [(ngModel)]="cliente.endereco.uf">
+                        </div>
+                    </div>
+                </div>
+
+                <h5 class="modal-title" id="editUserModalH5" style="margin-top: 20px">DADOS DE ACESSO</h5>
+                <div style="display: grid;grid-template-columns: 1fr 2fr 4fr;margin-top: 20px">
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Email"
+                                aria-label="Email" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.usuario.email">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Login"
+                                aria-label="Login" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.usuario.login">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Senha"
+                                aria-label="Senha" aria-describedby="basic-addon2" style="color: black;"
+                                [(ngModel)]="cliente.usuario.senha">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="atualizar()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

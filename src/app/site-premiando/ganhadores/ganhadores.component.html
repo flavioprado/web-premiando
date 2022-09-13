@@ -1,0 +1,42 @@
+<div class="mg-mobile">
+    <!--sorteios ativos-->
+<section class="sorteiosativos pagganhadores" style="margin-top: 20px;background-color: transparent;display: grid;">
+    <div class="title" style="display: flex;">
+        <div class="one" style="width: -webkit-fill-available;">
+            <h2 class="medium-bold colorazul2 font-all-title">Conheça os Ganhadores</h2>
+            <h5 class="medium colorSubTitle">Já são mais de 19 motos entregues em todo brasil</h5>
+        </div>
+        <div class="two" style="width: 100%; display: flex; justify-content: flex-end; align-items: center;">
+            <a href="#/sorteios" class="medium-bold botao-branco" style="color: #fc7322;">Comprar sorteios ativos</a>
+        </div>
+    </div>
+
+</section>
+
+<!--ganhadores-->
+<section class="ganhadores">
+
+    <div class="cards">
+        <div class="coluna config-ganhadores" style="display: grid; grid-template-columns: 1fr 1fr 1fr;gap: 1%;margin-top: 20px;">
+            <!--card-->
+            <div class="card" *ngFor="let ganhador of listGanhadores">
+                <div>
+                    <div class="title">
+                        <h3 class="bold colorazul2" style="font-size: 18px;">{{ganhador.titulo}}</h3>
+                        <h5 class="medium colorSubTitle">{{ganhador.ganhador}}</h5>
+                    </div>
+                    <div class="container-imagem" style="padding-top: 0px;padding-bottom: 0px;"
+                        (click)="openDialogGanhadores(ganhador.ganhador, ganhador.numeroCota, ganhador.cidade + '/' + ganhador.estado, ganhador.dataSorteio, ganhador.imagem)">
+                        <img src="/uploads/{{ganhador.imagem}}" style="width: 340px;height: 340px;">
+                    </div>
+                    <div *ngIf="ganhador.linkYouTube" class="play" (click)="openDialog(ganhador.linkYouTube)"
+                        style="cursor: pointer;">
+                        <img src="assets/site/icons/section ganhadores/play.png">
+                        <h6 class="bold colorazul2">Assista ao vídeo da entrega</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <!--presets-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Premiando</title>
+    <!--link css-->
+    <!--jquery import-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!--font roboto-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+</head>
+
+<body>
+    <!--slick-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <div class="header-cnpj" style="display: none;">
+        <label style="font-size: 11px;font-family: sans-serif;">
+            CNPJ: 44.055.269/0001-40&#160; &#160; &#160; &#160; &#160;RJ PAY SERVICOS LTDA
+        </label>
+    </div>
+
+    <!--header-->
+    <div class="header">
+        <a style="cursor: pointer;" (click)="navigateTo('principal')" class="logo" id="logoHeader"><img
+                src="assets/site/logo.png" alt=""></a>
+        <!--menu desktop-->
+        <div class="header-menu desktop">
+            <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('principal')">Pagina inicial</a>
+            <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('ganhadores')">Ganhadores</a>
+            <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('sorteios')">Sorteios</a>
+            <a *ngIf="isUserLogged()" class="colorazul" style="cursor: pointer;"
+                (click)="navigateTo('minhas-compras')">Minhas Compras</a>
+        </div>
+        <!--menu mobile-->
+        <div class="new-menu-mobile mobile" id="menuMobile">
+            <div style="text-align: end;">
+                <label class="close-menu" (click)="openMenuMobile(false)" aria-label="Fechar">X</label>
+            </div>
+            <a (click)="navigateTo('principal')" class="logo"
+                style="margin-bottom: 15px;margin-top: -63px;justify-content: flex-start;"><img
+                    src="assets/site/logo.png"></a>
+            <div style="display: grid !important; grid-template-columns: 1fr 7fr;gap: 5% 0%;">
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: black;align-self: center;">
+                    home</mat-icon>
+                <a class="colorazul bold align-text-menu-mobile" (click)="navigateTo('principal')">Pagina
+                    inicial</a>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: black;align-self: center;">
+                    perm_identity</mat-icon>
+                <a class="align-text-menu-mobile colorazul bold " (click)="navigateTo('ganhadores')">Ganhadores</a>
+                <mat-icon aria-hidden="false" aria-label="Example home icon" style="color: black;align-self: center;">
+                    brightness_low</mat-icon>
+                <a class="colorazul bold align-text-menu-mobile" (click)="navigateTo('sorteios')">Sorteios</a>
+                <mat-icon *ngIf="isUserLogged()" aria-hidden="false" aria-label="Example home icon"
+                    style="color: black;align-self: center;">chrome_reader_mode</mat-icon>
+                <a *ngIf="isUserLogged()" class="colorazul bold align-text-menu-mobile"
+                    (click)="navigateTo('minhas-compras')">Minhas Compras</a>
+            </div>
+            <button *ngIf="isUserLogged()" class="botao-laranja desktop" style="border-width: 0px;"
+                (click)="loggoutMobile()">Sair</button>
+            <button *ngIf="!isUserLogged()" class="botao-laranja"
+                style="margin-bottom: 10px; margin-top: 200px;border-width: 0px; border-radius: 10px;"
+                (click)="openLoginDialogMobile()">Minha conta</button>
+            <button *ngIf="isUserLogged()" class="botao-laranja"
+                style="margin-bottom: 10px; margin-top: 200px;border-width: 0px; border-radius: 10px;"
+                (click)="loggout()">Sair</button>
+        </div>
+        <div class="header-account">
+            <button *ngIf="!isUserLogged()" class="botao-laranja desktop" style="border-width: 0px;"
+                (click)="openLoginDialog()">Minha conta</button>
+            <button *ngIf="isUserLogged()" class="botao-laranja desktop" style="border-width: 0px;"
+                (click)="loggout()">Sair</button>
+            <div class="mobile hamburgue" style="display: none; cursor: pointer; font-size: 40px;margin-top: 7px;"
+                (click)="openMenuMobile(true)">
+                <i class="material-icons" style="font-size: 38px;">menu</i>
+            </div>
+        </div>
+    </div>
+
+    <router-outlet></router-outlet>
+
+    <!--footer-->
+    <footer style="margin-top: 4%;">
+        <!--foo-->
+        <div class="foo">
+            <a style="cursor: pointer;" (click)="navigateTo('principal')" class="logo"><img src="assets/site/logo.png"
+                    alt=""></a>
+            <div class="header-menu">
+                <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('principal')"
+                    routerLinkActive="active">Pagina inicial</a>
+                <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('ganhadores')"
+                    routerLinkActive="active">Ganhadores</a>
+                <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('sorteios')"
+                    routerLinkActive="active">Sorteios</a>
+                <a class="colorazul" style="cursor: pointer;" (click)="navigateTo('termos')"
+                    routerLinkActive="active">Termos</a>
+            </div>
+            <div class="foo-redes">
+                <a href="https://youtube.com/channel/UC5apiSfVu47gzeBQPJaRgWw" target="_blank"><img width="35px"
+                        height="35px" src="assets/site/icons/youtube2.png"></a>
+                <a href="https://www.instagram.com/premiando_" target="_blank"><img
+                        src="assets/site/icons/instagram.png" width="30px" height="30px"></a>
+            </div>
+        </div>
+        <div class="direitos">
+            <h6>©2021 Todos os direitos reservados</h6>
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                $('.sorteiosativos > div.boxs-ativos').slick({
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    prevArrow: '<div class="slick-prev"><img src="assets/site/icons/arrowprev.png"></div>',
+                    nextArrow: '<div class="slick-next"><img src="assets/site/icons/arrownext.png"></div>',
+                    arrows: true,
+                    responsive: [
+                        {
+                            breakpoint: 769,
+                            settings: {
+                                slidesToShow: 2,
+                                dots: true,
+                                arrows: false
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                dots: true,
+                                arrows: false
+                            }
+                        }
+                    ]
+                });
+            });
+        </script>
+
+        <script>
+            $(".header-account > div").click(function () {
+                $(".header-menu.mobile").addClass("active");
+                setTimeout(function () { $("body").css('overflow', 'hidden'); }, 500);
+            });
+
+            $(".botao-fechar").click(
+                function () {
+                    $(".header-menu.mobile").removeClass("active");
+                    $("body").css('overflow', 'scroll');
+                }
+            );
+        </script>
+    </footer>
+
+    <a id="faleConosco" href="https://api.whatsapp.com/send?phone=5584994175896" target="_blank" style="cursor: pointer;position: fixed;width: 150px;height: 40px;bottom: 40px;
+        right: 10px;background-color: #00c259;color: white;
+        border-radius: 50px;text-align: center;font-size: 15px; box-shadow: 2px 2px 3px #888;z-index: 1000;">
+
+        <!-- <div style="display: grid;grid-template-columns: 1fr 2fr;margin: 7px;"> -->
+        <div>
+            <!-- <i class="material-icons text-sucess-compras background-icons" style="cursor: pointer;">whatsapp</i> -->
+        </div>
+        <div>
+            <i class="fa fa-whatsapp float-btn"></i>
+
+            <label style="padding: 10px;cursor: pointer;color: white;">Fale Conosco</label>
+
+        </div>
+    </a>
+
+</body>
+
+</html>

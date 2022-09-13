@@ -1,0 +1,142 @@
+<div class="mg-mobile">
+    <!--section hero-->
+<section class="hero">
+    <!--Hero right-->
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" *ngIf="slideSHowActive$">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/uploads/{{slideSHowActive$.imagem}}" class="d-block w-100" alt="..." style="border-radius: 10px;cursor: pointer;" 
+            (click)="openSorteioAtivo('atual',slideSHowActive$.idSorteio)">
+          </div>
+
+          <div class="carousel-item"  *ngFor="let slide of slideSHow$">
+            <img src="/uploads/{{slide.imagem}}" class="d-block w-100" alt="..." style="border-radius: 10px;cursor: pointer;"
+            (click)="openSorteioAtivo('atual',slide.idSorteio)">
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+</section>
+
+<!--section participar-->
+<section class="participar">
+    <div class="container">
+        <div class="title mobile-title-participar" style="display: none;">
+            <h2 class="medium-bold colorazul2 font-all-title">Como participar ?</h2>
+            <h5 class="medium colorSubTitle">Aprenda em 04 passos simples a como participar dos nossos sorteios.</h5>
+        </div>
+        <div class="boxs">
+            <!--escolha uma rifa-->
+            <div id="content-box-participar">
+                <img src="assets/site/icons/section participar/icon1.png" class="icon-participar">
+                <div class="text">
+                    <h5 class="colorazul2 font-participar" style="font-size: 16px;">Escolha uma Rifa</h5>
+                    <h6 class="medium colorSubTitle" style="font-size: 12px;">É muito facil participar.<br>Comece
+                        escolhendo uma<br>Rifa ativa
+                    </h6>
+                </div>
+            </div>
+
+            <!--selecione numeros-->
+            <div id="content-box-participar">
+                <img src="assets/site/icons/section participar/icon2.png" class="icon-participar">
+                <div class="text">
+                    <h5 class="colorazul2 font-participar" style="font-size: 16px;">Selecione os números</h5>
+                    <h6 class="medium colorSubTitle" style="font-size: 12px;">Escolha quantos quiser!<br>Quanto mais,
+                        mais chances<br>de ganhar.
+                    </h6>
+                </div>
+            </div>
+
+            <!--Faça o pagamento-->
+            <div id="content-box-participar">
+                <img src="assets/site/icons/section participar/icon3.png" class="icon-participar">
+                <div class="text">
+                    <h5 class="colorazul2 font-participar" style="font-size: 16px;">Faça o pagamento</h5>
+                    <h6 class="medium colorSubTitle" style="font-size: 12px;">Escolha uma das formas de<br>pagamento
+                        disponíveis</h6>
+                </div>
+            </div>
+
+            <!--Faça o pagamento-->
+            <div id="content-box-participar">
+                <img src="assets/site/icons/section participar/icon4.png" class="icon-participar">
+                <div class="text">
+                    <h5 class="colorazul2 font-participar" style="font-size: 16px;">Aguarde o sorteio</h5>
+                    <h6 class="medium colorSubTitle" style="font-size: 12px;">Agora é aguardar o sorteio<br>pela
+                        Loteria Federal e boa<br>sorte!
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--sorteios ativos-->
+<section class="sorteiosativos" style="display: inline;">
+    <div class="title">
+        <h2 class="medium-bold colorazul2 font-all-title">Sorteios Ativos</h2>
+        <h5 class="medium colorSubTitle">Escolha um de nossos sorteios e comece a participar</h5>
+    </div>
+    <div class="boxs-ativos">
+        <div *ngFor="let sorteio of listSorteios" class="box">
+            <div *ngIf="!sorteio.ocultar || !sorteio.rifinha" (click)="openSorteioAtivo(sorteio.titulo, sorteio.id)">
+                <div class="container-imagem">
+                    <img *ngIf="sorteio.imagem" src="/uploads/{{sorteio.imagem}}">
+                    <div *ngIf="!sorteio.imagem" class="loader"></div>
+                </div>
+                <div class="container-marca">
+                    <!-- <img src="assets/site/sorteios/marcasorteio.png" alt=""> -->
+                </div>
+                <div class="container-infos">
+                    <h3 class="bold colorazul2">{{sorteio.titulo}}</h3>
+                    <h5 class="medium colorSubTitle">
+                        {{sorteio.descricao}}
+                    </h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--ganhadores-->
+<section class="ganhadores" style="margin-top: 90px;">
+    <!--title-->
+    <div class="tittle" style="margin-bottom: 40px;">
+        <h2 class="medium-bold colorazul2 font-all-title">Conheça os Ganhadores</h2>
+        <h5 class="medium colorSubTitle">Mais de 19 motos entregues em todo Brasil</h5>
+        <a (click)="navigateTo('ganhadores')" style="cursor: pointer;" class="botao-laranja">Conheça os Todos
+            Ganhadores</a>
+    </div>
+
+    <div class="cards">
+        <div class="coluna config-ganhadores" style="display: grid; grid-template-columns: 1fr 1fr 1fr;gap: 1%;margin-top: 20px;">
+            <!--card-->
+            <div class="card" *ngFor="let ganhador of listGanhadores | slice: 0:3">
+                <div>
+                    <div class="title">
+                        <h3 class="bold colorazul2" style="font-size: 18px;">{{ganhador.titulo}}</h3>
+                        <h5 class="medium colorSubTitle">{{ganhador.ganhador}}</h5>
+                    </div>
+                    <div class="container-imagem" style="padding-top: 0px;padding-bottom: 0px;"
+                        (click)="openDialogGanhadores(ganhador.ganhador, ganhador.numeroCota, ganhador.cidade + '/' + ganhador.estado, ganhador.dataSorteio, ganhador.imagem)">
+                        <img src="/uploads/{{ganhador.imagem}}" style="width: 340px;height: 340px;">
+                    </div>
+                    <div *ngIf="ganhador.linkYouTube" class="play" (click)="openDialog(ganhador.linkYouTube)"
+                        style="cursor: pointer;">
+                        <img src="assets/site/icons/section ganhadores/play.png">
+                        <h6 class="bold colorazul2">Assista ao vídeo da entrega</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</div>

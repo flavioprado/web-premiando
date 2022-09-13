@@ -1,0 +1,152 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div style="text-align: -webkit-center;margin-bottom: 20px;">
+          <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter bt-size-filter"
+          type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 30rem;color: black;">
+          {{sorteio ? sorteio.titulo : 'Sorteio'}}
+          </button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" style="color: black;" (click)="setSorteio(null)">Todos</a>
+            <a class="dropdown-item" style="color: black;" 
+            *ngFor="let sorteio of listSorteios" (click)="setSorteio(sorteio)">
+                {{ sorteio.titulo }}
+            </a>
+          </div>
+    </div>
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">check</i>
+                      </div>
+                      <p class="card-category">Liquído até hoje</p>
+                      <h3 class="card-title" style="font-size: 18px;font-weight: 500;">{{(totalLiquido ? totalLiquido : 0) | currency:"BRL"}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons text-success">add_shopping_cart</i> {{totalLiquido ? totalLiquido : 0}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+                <div class="card-header card-header-warning card-header-icon">
+                    <div class="card-icon">
+                        <i class="material-icons">hourglass_full</i>
+                    </div>
+                    <p class="card-category">Pendentes até hoje</p>
+                    <h3 class="card-title" style="font-size: 18px;font-weight: 500;">{{(totalPendentes ? totalPendentes : 0) | currency:"BRL"}}</h3>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons text-warning">add_shopping_cart</i>
+                        <a href="javascript:void(0)">{{totalPendentes ? totalPendentes : 0}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons">info_outline</i>
+                      </div>
+                      <p class="card-category">Cancelados até hoje</p>
+                      <h3 class="card-title" style="font-size: 18px;font-weight: 500;">{{(totalCancelados ? totalCancelados : 0) | currency:"BRL"}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons text-danger">add_shopping_cart</i> {{totalCancelados ? totalCancelados : 0}}
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                          <i class="fa fa-user"></i>
+                      </div>
+                      <p class="card-category">Total Compras</p>
+                      <h3 class="card-title" style="font-size: 18px;font-weight: 500;">{{totalCompras}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">update</i> Just Updated
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="row">
+          <div class="col-lg-12 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-warning">
+                      <h4 class="card-title">Resumo Por Conta</h4>
+                      <p class="card-category">Extrato das contas bancárias</p>
+                  </div>
+                  <div class="card-body table-responsive">
+                      <table class="table table-hover">
+                          <thead class="text-warning">
+                              <th>ID</th>
+                              <th>Conta</th>
+                              <th>Aprovados</th>
+                              <th>Pendentes</th>
+                              <th>Cancelados</th>
+                              <th>Qtd. Compras</th>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let conta of listContas">
+                                  <td>{{conta.idConta}}</td>
+                                  <td>{{conta.nomeConta}}</td>
+                                  <td>{{(conta.totalAprovado ? conta.totalAprovado : 0) | currency:"BRL"}}</td>
+                                  <td>{{(conta.totalPendente ? conta.totalPendente : 0) | currency:"BRL"}}</td>
+                                  <td>{{(conta.totalCancelado ? conta.totalCancelado : 0) | currency:"BRL"}}</td>
+                                  <td>{{conta.totalCompras}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div> 
+
+      <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-primary">
+                    <h4 class="card-title">Rifinhas</h4>
+                    <p class="card-category">Extrato das rifinhas</p>
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover">
+                        <thead class="text-warning">
+                            <th>ID</th>
+                            <th>Nome Rifinha</th>
+                            <th>Aprovados</th>
+                            <th>Pendentes</th>
+                            <th>Cancelados</th>
+                            <th>Qtd. Compras</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let rifinha of listSorteiosRifinha">
+                                <td>{{rifinha.idSorteio}}</td>
+                                <td>{{rifinha.titulo}}</td>
+                                <td>{{(rifinha.totalAprovado ? rifinha.totalAprovado : 0) | currency:"BRL"}}</td>
+                                <td>{{(rifinha.totalPendente ? rifinha.totalPendente : 0) | currency:"BRL"}}</td>
+                                <td>{{(rifinha.totalCancelado ? rifinha.totalCancelado : 0) | currency:"BRL"}}</td>
+                                <td>{{rifinha.totalCompras}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+  </div>
+</div>

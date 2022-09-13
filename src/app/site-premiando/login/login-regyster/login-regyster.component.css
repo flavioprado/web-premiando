@@ -1,0 +1,107 @@
+
+#particles-js {
+  height: 100%
+}
+
+.loginBox {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  min-height: 200px;
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 40px;
+  box-sizing: border-box
+}
+
+.user {
+  margin: 0 auto;
+  display: block;
+  margin-bottom: 20px
+}
+
+h3 {
+  margin: 0;
+  padding: 0 0 20px;
+  color: #59238F;
+  text-align: center
+}
+
+.loginBox input {
+  width: 100%;
+  margin-bottom: 20px
+}
+
+.loginBox input[type="text"],
+.loginBox input[type="password"] {
+  border: none;
+  border-bottom: 2px solid #fc7222da;;
+  outline: none;
+  height: 40px;
+  color: #000;
+  background: transparent;
+  font-size: 16px;
+  padding-left: 20px;
+  box-sizing: border-box
+}
+
+.loginBox input[type="text"]:hover,
+.loginBox input[type="password"]:hover {
+  color: #262626;
+  border: 1px solid #fae842;
+  box-shadow: 0 0 5px rgba(255, 102, 0, 0.3), 0 0 10px rgba(217, 255, 0, 0.2), 0 0 15px rgba(208, 255, 0, 0.1), 0 2px 0 rgb(117, 0, 0)
+}
+
+.loginBox input[type="text"]:focus,
+.loginBox input[type="password"]:focus {
+  border-bottom: 2px solid #fae842
+}
+
+.inputBox {
+  position: relative
+}
+
+.inputBox-cadastro {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 0% 2%;
+}
+
+@media screen and (max-width: 450px) {
+  .inputBox-cadastro {
+    grid-template-columns: 1fr;
+    gap: 0% 0%;
+  }
+}
+
+.inputBox span {
+  position: absolute;
+  top: 10px;
+  color: #fc7322;
+}
+
+.loginBox input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  font-size: 16px;
+  background: #fc7322;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer
+}
+
+.loginBox a {
+  color: #262626;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+  display: block
+}
+
+a:hover {
+  color: #fc7322;
+}

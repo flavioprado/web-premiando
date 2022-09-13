@@ -1,0 +1,324 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger card-header-black">
+                        <div class="mb-3 justify-content-center dsp-filter-sorteios">
+
+                            <div style="display: flex;">
+                                <div class="align-self-end wdt-nome-filter-sorteios">
+                                    <div class="input-group col-md-12">
+                                        <input type="text" class="form-control text-white bt-border-custom" style="background-color: transparent;"
+                                            placeholder="Titulo" aria-label="Titulo" aria-describedby="basic-addon2"
+                                            [(ngModel)]="nameFilter">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-secondary bt-close-filter" type="button"
+                                                    (click)="clearFilterSearchName()">
+                                                <i class="material-icons">close</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="align-self-end">
+                                    <div class="input-group col-md-12">
+                                        <button mat-raised-button type="submit" class="btn btn-white pull-right"
+                                            style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;"
+                                            (click)="atualizarListaEFiltrar()">
+                                            <i class="material-icons">search</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex;">
+                                <div class="align-self-end">
+                                    <div class="input-group col-md-12">
+                                        <button mat-raised-button type="submit" class="btn btn-white pull-right"
+                                            style="padding: 8px 8px !important;margin-top: 17px;margin-bottom: 0px;"
+                                            data-toggle="modal" data-target="#editSorteioModal" (click)="loadEditSorteio(null)">
+                                            <i class="material-icons">add</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                    <th>ID</th>
+                                    <th><i class="material-icons">image</i></th>
+                                    <th>Status</th>
+                                    <th>Titulo/Descrição</th>
+                                    <th>Ganhador</th>
+                                    <th>Nº Sorteado</th>
+                                    <th></th>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let sorteio of listaSorteios | orderBy: key : reverse | paginate: { itemsPerPage: 10, currentPage: paginaAtual }; let i = index">
+                                        <td>
+                                            {{sorteio.id}}
+                                        </td>
+                                        <td>
+                                            <b><img src="/uploads/{{sorteio.imagem}}" style="width: 100px;height: 100px;"></b>
+                                        </td>
+                                        <td>
+                                            <b><label [ngClass]="getClassLabelStatus(sorteio.status)">{{sorteio.status}}</label></b>
+                                        </td>
+                                        <td>
+                                            <tr style="font-weight: 500;">{{sorteio.titulo}}</tr>
+                                            <tr>{{sorteio.descricao}}</tr>
+                                        </td>
+                                        <td>
+                                            <b>{{sorteio.ganhador}}</b>
+                                        </td>
+                                        <td>
+                                            <b>{{sorteio.numeroSorteado}}</b>
+                                        </td>
+                                        <td>
+                                            <div class="input-group-prepend">
+                                                <button class="btn btn-outline-secondary dropdown-toggle bt-size-filter"
+                                                  type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Opções </button>
+                                                <ul class="dropdown-menu" role="menu">
+                                                  <li><a class="dropdown-item cursor-p" data-toggle="modal" data-target="#editSorteioModal" (click)="loadEditSorteio(sorteio.id)">
+                                                      <i class="material-icons mr-2">edit</i>Editar Sorteio</a>
+                                                    </li>
+                                                  <li class="divider"></li>
+                                                  <li><a class="dropdown-item cursor-p">
+                                                      <i class="material-icons mr-2">shopping_cart</i>Listar Compras</a>
+                                                    </li>
+                                                  <li><a class="dropdown-item cursor-p" (click)="baixarLista(sorteio.id, sorteio.titulo)">
+                                                      <i class="material-icons mr-2">assignment</i>Baixar Lista</a>
+                                                    </li>
+                                                  <li class="divider"></li>
+                                                  <li><a class="dropdown-item cursor-p" data-toggle="modal" data-target="#definirGanhadorModal" (click)="setSorteioId(sorteio.id)">
+                                                      <i class="material-icons mr-2">done</i>Definir Ganhador</a>
+                                                    </li>
+                                                  <li><a class="dropdown-item cursor-p" (click)="openPageSorteio(sorteio.titulo,sorteio.id)">
+                                                      <i class="material-icons mr-2">public</i>Página do Sorteio</a>
+                                                    </li>
+                                                  <li><a class="dropdown-item cursor-p" (click)="delete(sorteio.id)">
+                                                      <i class="material-icons mr-2">delete_outline</i>Excluir</a>
+                                                    </li>
+                                                </ul>
+                                              </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior"
+                                nextLabel="Próximo" style="text-align: end;"></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Definir Ganhador-->
+<div class="modal fade" id="definirGanhadorModal" tabindex="-1" role="dialog" aria-labelledby="definirGanhadorModal"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 200px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editUserModalH5">Definir Ganhador</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalDefinirGanhador">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid;grid-template-columns: 1fr 3fr;margin-top: 20px">
+                    <div class="align-self-end" style="width: 10rem;">
+                        <div class="input-group col-md-12">
+                            <input type="number" class="form-control bt-border-custom" placeholder="Nº cota"
+                                aria-label="Nº cota" aria-describedby="basic-addon2"
+                                [(ngModel)]="numeroCota">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" (click)="definir()">Definir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit User-->
+<div class="modal fade" id="editSorteioModal" tabindex="-1" role="dialog" aria-labelledby="editSorteio"
+    aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 1000px;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editSorteioModalH5">Sorteio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeModalEditSorteio">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid;grid-template-columns: 1fr;margin-top: 20px">
+                    <div class="align-self-end" >
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Titulo"
+                                aria-label="Titulo" aria-describedby="basic-addon2"
+                                [(ngModel)]="sorteio.titulo">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid;grid-template-columns: 4fr 2fr 2fr;margin-top: 20px;">
+                    <div class="align-self-end" style="width: 30rem;">
+                        <div class="input-group col-md-12">
+                            <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter bt-size-filter"
+                            type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 30rem;color: black;">
+                            {{sorteio.statusDescricao ? sorteio.statusDescricao : 'Status'}}
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" style="color: black;" 
+                                *ngFor="let status of listStatusSorteio" (click)="setStatus(status)">
+                                    {{ status.descricao }}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="valor"
+                                aria-label="valor" aria-describedby="basic-addon2" [(ngModel)]="sorteio.valor"
+                                currencyMask [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Whatsapp"
+                                aria-label="Whatsapp" aria-describedby="basic-addon2"
+                                mask="(00)00000-0000" [(ngModel)]="sorteio.whatsapp"
+                                [specialCharacters]="[ 'space' ,'(' , ')' , '-' ]" >
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid;grid-template-columns: 4fr 2fr 2fr;margin-top: 20px">
+                    <div class="align-self-end" style="width: 30rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="Descrição" aria-label="Descrição"
+                                aria-describedby="basic-addon2" [(ngModel)]="sorteio.descricao">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="adicional1"
+                                aria-label="adicional1" aria-describedby="basic-addon2"
+                                [(ngModel)]="sorteio.adicional1">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="text" class="form-control bt-border-custom" placeholder="adicional2"
+                                aria-label="adicional2" aria-describedby="basic-addon2"
+                                [(ngModel)]="sorteio.adicional2">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid;grid-template-columns: 2fr 2fr 4fr;margin-top: 20px;">
+                    <div class="align-self-end" style="width: 30rem;">
+                        <div class="input-group col-md-12">
+                            <input type="date" class="form-control bt-border-custom" placeholder="Data Sorteio"
+                                aria-label="Data Sorteio" aria-describedby="basic-addon2"
+                                [(ngModel)]="sorteio.dataSorteio">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="number" class="form-control bt-border-custom" placeholder="Nº Inicial"
+                                aria-label="Nº Inicial" aria-describedby="basic-addon2"
+                                [(ngModel)]="sorteio.numeroInicial">
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <input type="number" class="form-control bt-border-custom" placeholder="Nº Final" aria-label="Nº Final"
+                                aria-describedby="basic-addon2"
+                                [(ngModel)]="sorteio.numeroFinal">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="align-self-end" style="width: 30rem;margin-top: 20px;" *ngIf="sorteio.rifinha">
+                    <div class="input-group col-md-12">
+                        <button class="btn btn-outline-secondary dropdown-toggle bt-close-filter bt-size-filter"
+                        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 30rem;color: black;">
+                        {{sorteio.nomeSorteioRifinha ? sorteio.nomeSorteioRifinha : 'Sorteio Principal da Rifinha'}}
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" style="color: black;" 
+                            *ngFor="let sorteioRifinha of listaSorteiosRifinha" (click)="setSorteioRifinha(sorteioRifinha)">
+                                {{ sorteioRifinha.titulo }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display: grid;grid-template-columns: 1fr 1fr 1fr 1fr;margin-top: 20px">
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <div class="form-check">
+                                <input type="checkbox" [value]="sorteio.ocultar" [(ngModel)]="sorteio.ocultar" id="flexCheckOcultar">
+                                <label class="form-check-label" for="flexCheckOcultar">
+                                    Ocultar
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <div class="form-check">
+                                <input type="checkbox" [value]="sorteio.rifinha" [(ngModel)]="sorteio.rifinha" id="flexCheckRifinha">
+                                <label class="form-check-label" for="flexCheckRifinha">
+                                    Rifinha
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                            <div class="form-check">
+                                <input type="checkbox" [value]="sorteio.exibirData" [(ngModel)]="sorteio.exibirData" id="flexCheckExibirData">
+                                <label class="form-check-label" for="flexCheckExibirData">
+                                    Exibir Data
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="align-self-end" style="width: 15rem;">
+                        <div class="input-group col-md-12">
+                                <input type="file" style="display: none;" class="file-upload" [(ngModel)]="sorteio.imagem"
+                                    (change)="fileChange($event)" #fileUpload>
+    
+                                <div class="file-upload">
+    
+                                    {{fileName.substring(0,15) || "Selecionar imagem"}}
+    
+                                    <button mat-mini-fab  class="btn btn-primary" (click)="fileUpload.click()" style="margin-left: 5px;">
+                                        <i class="material-icons">attach_file</i>
+                                    </button>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="saveOrUpdate()">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

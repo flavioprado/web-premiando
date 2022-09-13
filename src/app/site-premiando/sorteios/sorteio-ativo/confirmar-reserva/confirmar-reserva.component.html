@@ -1,0 +1,108 @@
+<div style="border-bottom: 1px solid #dee2e6;margin: 0px">
+    <h4 style="line-height: 1.5;font-family: montserrat,sans-serif;margin-left: 23px;">CHECKOUT</h4>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNoClick(false)"
+        style="font-size: 2rem;padding: 1rem;margin: -5rem -1rem -1rem auto;cursor: pointer;background-color: transparent;border: 0;appearance: none;
+    float: right;font-weight: 700;line-height: 1;color: #232323;text-shadow: 0 1px 0 #fff;opacity: .5;margin-right: -5px;margin-top: -4.4rem;">
+        <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div style="margin-top: 15px;">
+    <div style="font-family: sans-serif;font-size: 16px;color: #000;font-weight: 400;line-height: 1.5;text-align: center;width: 100%;">
+        <b>{{sorteio.titulo}}</b>
+    </div>
+    <div style="font-family: sans-serif;font-size: 13px;color: #000;font-weight: 400;line-height: 1.5;text-align: center;width: 100%;">
+        <b>Números Selecionados:</b>
+    </div>
+    <div class="raffle-selected-numbers bg-white py-3">
+
+        <div class="cards-cota-finalizar" *ngIf="!sorteio.rifinha"
+            style="margin-top: 0px;margin-left: 0px;margin-right: 600px;margin-bottom: 10px;text-align: center;">
+            <label class="card-cota btn text-cotas-checkout" *ngFor="let cota of cotasHaComprar"
+                (click)="unSelectCota(cota)">
+                {{("000" + cota.numeroCota).slice(-3) | mask: '999'}}
+            </label>
+        </div>
+
+        <div class="cards-cota-finalizar" *ngIf="sorteio.rifinha"
+            style="margin-top: 15px;margin-left: 0px;margin-right: 600px;margin-bottom: 10px;">
+            <label class="card-cota btn" *ngFor="let cota of cotasHaComprar" (click)="unSelectCota(cota)">
+                {{("00" + cota.numeroCota).slice(-2) | mask: '99'}}
+            </label>
+        </div>
+
+        <div style="margin-bottom: 0.5rem!important;padding-top: 10px;margin-top: 0.5rem!important;display: grid;grid-template-columns: 1fr 1fr;">
+            <label class="pop-finalizar-label-total badger"
+                style="background-color: #363232;border-radius: 5px;padding: 5px;color: white;font-size: 17px;">
+                {{cotasHaComprar.length}} x {{sorteio.valor | currency: 'BRL'}}
+            </label>
+            <label class="pop-finalizar-label-total badger"
+                style="background-color: rgb(26 213 152);border-radius: 5px;padding: 5px;color: white;font-size: 17px; margin-left: 15px;">
+                Total: <b>{{cotasHaComprar.length * sorteio.valor | currency: 'BRL'}}</b>
+            </label>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" style="background-color: white;padding: 0px;text-align: center;" *ngIf="id == 0">
+    <h2 class="text-dados-participantes" style="font-weight: bold;">DADOS DO PARTICIPANTE</h2>
+    <div *ngIf="!isSaveNewUser()">
+        <div class="col-75" style="">
+            <input type="text" id="loginUsername" name="loginUsername" [(ngModel)]="loginCliente.email"
+                placeholder="CPF ou Email" tabindex="1" autocomplete="login">
+        </div>
+        <div class="col-25">
+            <button id="bt_verificar_login" type="submit" *ngIf="!isExistentLogin()" style="align-items: center;margin: 5px;"
+                (click)="isLoginExists()" class="">OK</button>
+        </div>
+    </div>
+
+    <div *ngIf="isExistentLogin()">
+        <div class="col-75" >
+            <input type="password" id="loginPasword" name="loginPassword" [(ngModel)]="loginCliente.senha"
+                placeholder="Senha..">
+        </div>
+    </div>
+
+    <div *ngIf="isSaveNewUser()">
+        <div class="col-50">
+            <input type="text" id="nomeCompleto" name="nomeCompleto" [(ngModel)]="cliente.nome"
+                placeholder="Nome Completo">
+        </div>
+        <div class="col-50">
+            <input type="text" id="cpf" name="cpf" [(ngModel)]="cliente.cpf" mask="000.000.000-00" placeholder="CPF">
+        </div>
+    </div>
+
+    <div *ngIf="isSaveNewUser()">
+        <div class="col-50">
+            <input type="text" id="email" name="email" [(ngModel)]="cliente.usuario.email" placeholder="Email">
+        </div>
+        <div class="col-50">
+            <input type="text" id="celular" name="celular" [(ngModel)]="cliente.celular" mask="(00)000000000"
+                placeholder="Celular/WhatssApp">
+        </div>
+    </div>
+
+    <div *ngIf="isSaveNewUser()">
+        <div class="col-50">
+            <input type="password" id="senha" name="senha" [(ngModel)]="cliente.usuario.senha" placeholder="Senha">
+        </div>
+    </div>
+
+    <div *ngIf="isSaveNewUser()  && isBloquearClick" style="margin-left: -5px;margin-right: 5px;">
+        <button id="bt_finalizar_checkout_new_user" type="submit" style="align-items: center;"
+            (click)="saveOrUpdate()">Concluir</button>
+    </div>
+
+    <div *ngIf="isExistentLogin()  && isBloquearClick" style="margin-left: -5px;margin-right: 5px;">
+        <button id="bt_finalizar_logar" type="submit" style="align-items: center;" (click)="login()">Logar</button>
+    </div>
+</div>
+<div *ngIf="id > 0 && isBloquearClick" style="text-align: right;">
+    <button id="bt_finalizar_checkout" type="submit"  style="align-items: center;margin-left: -5px;margin-right: 5px;" (click)="confirmarReserva($event)">Reservar</button>
+</div>
+<div style="display: inline-block;">
+    <p style="margin-top: 30px;font-size: 15px;">Ao clicar em Finalizar, você declara que está de acordo com os <b style="font-weight: bold;">termos de uso</b> do
+        site.</p>
+</div>
