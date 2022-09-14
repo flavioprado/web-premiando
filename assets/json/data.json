@@ -167,7 +167,7 @@
 },
 {
     "id": "15",
-    "imagem": "assets/site/ganhadores/ganhador15.png",
+    "imagem": "ganhador15.png",
     "titulo": "TRIUMPH ROCKET 3 R",
     "ganhador": "Vagner Justino Pereira",
     "numeroCota": "680",
@@ -179,7 +179,7 @@
 },
 {
     "id": "16",
-    "imagem": "assets/site/ganhadores/ganhador16.png",
+    "imagem": "ganhador16.png",
     "titulo": "TRIUMPH TIGER 900 RALLY PRO",
     "ganhador": "Carlos Lopes Silva",
     "numeroCota": "429",
