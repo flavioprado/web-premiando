@@ -27,7 +27,7 @@
                     </div>
                     <div class="container-imagem" style="padding-top: 0px;padding-bottom: 0px;"
                         (click)="openDialogGanhadores(ganhador.ganhador, ganhador.numeroCota, ganhador.cidade + '/' + ganhador.estado, ganhador.dataSorteio, ganhador.imagem)">
-                        <img src="/uploads/{{ganhador.imagem}}" style="width: 340px;height: 340px;">
+                        <img src="https://flavioprado.github.io/web-premiando/uploads/{{ganhador.imagem}}" style="width: 340px;height: 340px;">
                     </div>
                     <div *ngIf="ganhador.linkYouTube" class="play" (click)="openDialog(ganhador.linkYouTube)"
                         style="cursor: pointer;">

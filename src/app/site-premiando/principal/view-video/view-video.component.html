@@ -1,9 +1,23 @@
-<iframe *ngIf="!checkIsIphone()" id="player" class="youtube-player" type="text/html" width="640" height="385"
-    [src]="data" frameborder="0">
-</iframe>
+<!-- <iframe *ngIf="!checkIsIphone()" id="player" class="youtube-player" width="640" height="385"
+    [src]="data" frameborder="0" allowfullscreen>
+</iframe> -->
+<!-- 
+<iframe *ngIf="checkIsIphone()" id="player"   width="250" height="385"
+    [src]="dataIphone" frameborder="0" allowfullscreen>
+</iframe> -->
 
-<object type="application/x-shockwave-flash" [data]="dataIphone" *ngIf="checkIsIphone()"
+<div>
+    <iframe width="250" height="385" src="https://www.youtube.com/embed/aFkb6SB9EpA"
+        title="Depoimento #429 - Carlos Lopes Silva / Porto Velho - RO" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+</div>
+
+
+
+
+<!-- <object type="application/x-shockwave-flash" [data]="dataIphone" *ngIf="checkIsIphone()"
     width="250" height="385" >
     <param name="quality" value="high" />
     <param name="allowFullScreen" value="true" />
-</object>
+</object> -->

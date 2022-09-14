@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-video',
@@ -15,12 +15,12 @@ export class ViewVideoComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    //   this.dataIphone = String(this.data).replace('embed', 'v')
-    //   this.dataIphone = this.sanitizer.bypassSecurityTrustResourceUrl(this.dataIphone)
-    //   this.data = this.sanitizer.bypassSecurityTrustResourceUrl(this.data)
+    this.dataIphone = String(this.data).replace('embed', 'v')
+    this.dataIphone = this.sanitizer.bypassSecurityTrustResourceUrl(this.dataIphone)
+    this.data = this.sanitizer.bypassSecurityTrustResourceUrl(this.data)
   }
 
-  checkIsIphone = function () {
+  checkIsIphone = function() {
     if (navigator.userAgent.match(/iPhone/i)) {
       return true;
     }
